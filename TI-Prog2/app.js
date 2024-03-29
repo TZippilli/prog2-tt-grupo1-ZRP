@@ -7,8 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 //importo ruteadores
-var profileRouter = require('./routes/profile');
 var productRouter = require('./routes/product');
+var profileRouter = require('./routes/profile');
 var resultsRouter = require('./routes/results');
 
 var app = express();
@@ -25,9 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-//defino que solicitud es manejada por que ruteador 
-app.use('/profile', profileRouter);
+//defino que solicitud es manejada por qué ruteador 
 app.use('/product', productRouter);
+app.use('/profile', profileRouter);
 app.use('/search-results', resultsRouter);
 
 
