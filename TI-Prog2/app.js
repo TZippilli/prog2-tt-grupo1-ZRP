@@ -6,6 +6,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+//importo ruteadores
+var profileRouter = require('./routes/profile');
+var productRouter = require('./routes/product');
+var resultsRouter = require('./routes/results');
 
 var app = express();
 
@@ -21,6 +25,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+//defino que solicitud es manejada por que ruteador 
+app.use('/profile', profileRouter);
+app.use('/product', productRouter);
+app.use('/search-results', resultsRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
