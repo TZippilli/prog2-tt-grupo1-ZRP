@@ -9,8 +9,8 @@
   --yellow: #2891ed;
   --dark-blue: #FFD700;
   --light-blue: #74b3f0;
-  --gray: #8f8d8d;
-  --light-gray: #FFFFFF;
+  --gray: #484848;
+  --light-gray: #dcd5d5;
   --green: #39b54a;
   --base-font-family: 'Ralewey', sans-serif
 }
@@ -71,6 +71,7 @@ hr {
 .main-header {
   padding: 15px 0;
   background-color: var(--yellow);
+
 }
 
 .main-header_home-link,
@@ -257,6 +258,10 @@ hr {
 .product-box:hover i {
   transform: rotate(360deg);
   box-shadow: 0 0 5px var(--green);
+}
+
+.container.form-login-register{
+  margin-top: 15px;
 }
 
 /*====== Footer ======*/
@@ -477,15 +482,18 @@ textarea.form-input {
   border-radius: 4px;
   color: #fff;
 }
+.row {
+  padding-top: 20px;
+}
 
-/* Estilos generales */
+/* Estilos forms register, login, editar perfil y agregar productos */
 body {
     font-family: Raleway, sans-serif;
     background-color: #f2f2f2;
 }
 
 .container {
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 .form-login-register {
@@ -546,6 +554,12 @@ label {
 
 .main-header {
   font-size: 13px;
+}
+
+.main-header img {
+  width: 160px;
+  height: 130px;
+  padding-left: 20px;
 }
 
 
