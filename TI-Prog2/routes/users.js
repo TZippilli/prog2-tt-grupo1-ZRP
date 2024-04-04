@@ -12,4 +12,3 @@ router.get('/register', function(req, res, next) {
 
 module.exports = router;
 
-aña = aña
