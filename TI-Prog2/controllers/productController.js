@@ -1,7 +1,12 @@
-const controlador = {
+const productController = {
     index: function(req, res, next) {
-        res.render('product')
+        res.render('product');
+    },
+
+    create: function(req, res) {
+        res.render("product-add");
     }
+
 }
 
-module.exports = controlador
+module.exports = productController
