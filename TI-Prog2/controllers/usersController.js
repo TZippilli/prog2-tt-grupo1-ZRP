@@ -4,7 +4,7 @@ const usersController = {
     },
 
     profileEdit: function(req, res, next) {
-        res.render("profileEdit");
+        res.render("profile-edit");
     },
 
     profile: function(req, res, next) {

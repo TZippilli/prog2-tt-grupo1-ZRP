@@ -2,13 +2,9 @@
 
 var express = require('express'); //importo el módulo
 var router = express.Router();
+const productController = require("../controllers/productController");
 
-router.get('/', function(req, res, next) {
-    res.render('product'); //rendirizo la vista product
-  });
-
-router.get('/add', function(req, res, next) { //defino la ruta
-res.render('product-add'); //renderizo la segunda vista de product-add
-});
+router.get("/", productController.index);
+router.get("/add", productController.newProd);
 
 module.exports = router; //exporto el router
