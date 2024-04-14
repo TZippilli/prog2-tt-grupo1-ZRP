@@ -8,7 +8,8 @@ const usersController = {
     },
 
     profile: function(req, res, next) {
-        res.render("profile");
+        const nombreUsuario = req.user.username;
+        res.render("profile", { nombreUsuario });
     },
 
     register: function(req, res, next) {
