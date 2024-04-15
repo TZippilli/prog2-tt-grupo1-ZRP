@@ -1,3 +1,5 @@
+const db = require('../db/data');
+
 const usersController = {
     login: function(req, res, next) {
         res.render('login');
@@ -8,13 +10,12 @@ const usersController = {
     },
 
     profile: function(req, res, next) {
-        res.render("profile");
+        res.render("profile", { db: db }); 
     },
 
     register: function(req, res, next) {
         res.render("register");
     }
-
 }
 
-module.exports = usersController
+module.exports = usersController;
