@@ -22,12 +22,29 @@ CREATE TABLE products (
 /*   nombreColumna      tipoDato        Restricciones */
     id                  INT             UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     clienteId           INT             UNSIGNED,
-    nombreProd          VARCHAR(250)    NOT NULL,
-    imagenProd          VARCHAR(250)    NOT NULL,
-    descripcion         VARCHAR(250)    NOT NULL,
+    nombreProduct       VARCHAR(250)    NOT NULL,
+    imagenProduct       VARCHAR(250)    NOT NULL,
+    descripcionProduct  VARCHAR(250)    NOT NULL,
     createdAt           TIMESTAMP       DEFAULT CURRENT_TIMESTAMP ,
     updatedAt           TIMESTAMP       DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deletedAt           TIMESTAMP       NULL,
     FOREIGN KEY (clienteId) REFERENCES users(id)
-);
+    );
+
+
+CREATE TABLE comentarios (
+
+/*  nombreColumna       tipoDato        Restricciones */
+
+    id                  INT             UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    productId           INT             UNSIGNED,
+    clienteId           INT             UNSIGNED,
+    comentario          VARCHAR(250)    NOT NULL,
+    createdAt           TIMESTAMP       DEFAULT CURRENT_TIMESTAMP ,
+    updatedAt           TIMESTAMP       DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deletedAt           TIMESTAMP       NULL,
+
+    FOREIGN KEY (clienteId) REFERENCES users(id),
+    FOREIGN KEY (productId) REFERENCES products(id)
+    );
 
