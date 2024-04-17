@@ -6,11 +6,11 @@ const usersController = {
     },
 
     profileEdit: function(req, res, next) {
-        res.render("profile-edit");
+        res.render("profile-edit", {db:db});
     },
 
     profile: function(req, res, next) {
-        res.render("profile", { db: db }); 
+        res.render("profile", { db: db}); 
     },
 
     register: function(req, res, next) {
