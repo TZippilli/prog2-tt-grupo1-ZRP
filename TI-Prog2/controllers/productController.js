@@ -10,7 +10,7 @@ const productController = {
     },
 
     newProd: function(req, res) {
-        res.render("product-add");
+        res.render("product-add", {db:db});
     }
 }
 
