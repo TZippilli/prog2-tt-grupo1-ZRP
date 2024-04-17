@@ -6,13 +6,14 @@
 
 /*====== Variables ======*/
 :root {
-  --yellow: #2891ed;
-  --dark-blue: #FFD700;
-  --light-blue: #74b3f0;
+  --yellow: #DF0909;
+  --dark-blue: #ff1e1e;
+  --light-blue: #ff5757;
   --gray: #484848;
-  --light-gray: #dcd5d5;
+  --light-gray: #ff9f9f;
   --green: #39b54a;
-  --base-font-family: 'Ralewey', sans-serif
+  --base-font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
 }
 
 
@@ -76,7 +77,7 @@ hr {
 
 .main-header_home-link,
 .main-header_credit-link {
-  display: block;
+  display: flex;
 }
 
 .main-header_credit-link {
@@ -89,6 +90,7 @@ hr {
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .search-form_input {
@@ -143,7 +145,7 @@ hr {
 }
 
 .logout:hover{
-  color: #1259c3;
+  color: white;
 }
 
 .left-navbar a,
@@ -454,11 +456,7 @@ hr {
   font-size: 1.4em;
 }
 
-textarea.form-input {
-  min-height: 140px;
-  resize: vertical;
-  padding: 15px;
-}
+
 
 /*====== Profile ======*/
 .info-usuario{
@@ -477,7 +475,7 @@ textarea.form-input {
 }
 
 .btn{
-  background-color: #1259c3;
+  background-color: #DF0909;
   padding: 10px 20px;
   border-radius: 4px;
   color: #fff;
@@ -488,7 +486,7 @@ textarea.form-input {
 
 /* Estilos forms register, login, editar perfil y agregar productos */
 body {
-    font-family: Raleway, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background-color: #f2f2f2;
 }
 
@@ -500,19 +498,19 @@ body {
     background-color: #fff;
     border-radius: 20px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-    padding: 25px; /* Aumentamos el padding */
-    max-width: 650px; /* Aumentamos el ancho máximo */
+    padding: 25px; 
+    max-width: 650px; 
     margin: auto;
 }
 
 .login-title {
     text-align: center;
     color: #333;
-    font-size: 24px; /* Aumentamos el tamaño de la letra */
+    font-size: 24px;
 }
 
 .formulario {
-    margin-bottom: 25px; /* Aumentamos el margen inferior */
+    margin-bottom: 25px; 
 }
 
 label {
@@ -522,10 +520,10 @@ label {
 
 .form-login {
     width: calc(100% - 40px);
-    padding: 12px; /* Aumentamos el padding */
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 18px; /* Aumentamos el tamaño de la letra */
+    font-size: 18px; 
 }
 
 .form-checkbox {
@@ -535,7 +533,7 @@ label {
 .button-form {
     width: 100%;
     padding: 12px; /* Aumentamos el padding */
-    background-color: #007bff;
+    background-color: #DF0909;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -545,7 +543,7 @@ label {
 }
 
 .button-form:hover {
-    background-color: #0056b3;
+    background-color: #ff5353;
 }
 
 .registro-title {
@@ -563,6 +561,18 @@ label {
 }
 
 
+.product-box_image img {
+  height: 265px;
+  width: 265px;
+}
+/* cambio tipografías */
+.product-box_data {
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+.footer-data{
+font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
 /*====== Media-Queries ======*/
 @media (min-width: 768px) {
   .main-header_credit-link {

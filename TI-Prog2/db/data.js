@@ -78,7 +78,7 @@ const db = {
             ]
         },
         {
-            imagen: "foto2.png",
+            imagen: "foto2.jpeg",
             nombre: "Pagani Zonda",
             descripcion: "Magia italiana",
             comentarios: [
