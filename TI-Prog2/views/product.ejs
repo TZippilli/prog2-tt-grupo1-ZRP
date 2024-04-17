@@ -2,56 +2,62 @@
 <html lang="es">
 <!-- Include Head -->
 <%- include("./partials/head") %>
-<body>
-	<!-- Header -->
-	<%- include("./partials/header") %>
+
+	<body>
+		<!-- Header -->
+		<%- include("./partials/header") %>
 
 
-	<div class="container products-wrapper">
-		<div class="d-flex align-items-center">
-			<h2 class="products-title"><%= producto.nombre %></h2> 
-			<p class="product-detail-description">
-				<a href="/product/add">Editar</a>
-			</p>
-		</div>
-		<div class="product-detail">
-			<div class="row">
-
-				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="/images/products/<%= producto.imagen %>" alt="" class="product-detail-img">
+			<div class="container products-wrapper">
+				<div class="d-flex align-items-center">
+					<h2 class="products-title">
+						<%= producto.nombre %>
+					</h2>
 					<p class="product-detail-description">
-						<%= producto.descripcion %>
+						<a href="/product/add">Editar</a>
 					</p>
-				</article>
-				<div class="col-12 col-lg-4">
-					<section class="comments">
-						<% producto.comentarios.forEach(function(comentario) { %>
-							<article>
-								<img src="https://via.placeholder.com/35" alt="">
-								<div class="data">
-									<p class="user">
-										<strong> <a href="/profile"><%= comentario.nombre %>: </a> </strong>
-										<%= comentario.comentario %>
-									</p>
-								</div>
-							</article>
-						<% }); %>
-					
-					</section>
-					<form class="form">
-						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
-						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-					</form>
-					<hr>
+				</div>
+				<div class="product-detail">
+					<div class="row">
+
+						<article class="col-12 col-lg-8 product-detail-info">
+							<img src="/images/products/<%= producto.imagen %>" alt="" class="product-detail-img">
+							<p class="product-detail-description">
+								<%= producto.descripcion %>
+							</p>
+						</article>
+						<div class="col-12 col-lg-4">
+							<section class="comments">
+								<% producto.comentarios.forEach(function(comentario) { %>
+									<article>
+										<img src="https://via.placeholder.com/35" alt="">
+										<div class="data">
+											<p class="user">
+												<strong> <a href="/profile">
+														<%= comentario.nombre %>:
+													</a> </strong>
+												<%= comentario.comentario %>
+											</p>
+										</div>
+									</article>
+									<% }); %>
+
+							</section>
+							<form class="form">
+								<input class="form-input" type="text" value="" placeholder="Agregar comentario">
+								<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+							</form>
+							<hr>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
 
 
-	<!-- footer -->
-	<%- include("./partials/footer") %>
-	<!-- /footer -->
+			<!-- footer -->
+			<%- include("./partials/footer") %>
+				<!-- /footer -->
 
-</body>	
+	</body>
+
 </html>

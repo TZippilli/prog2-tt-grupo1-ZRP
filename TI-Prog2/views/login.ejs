@@ -3,40 +3,40 @@
 <!-- Include Head -->
 <%- include("./partials/head") %>
 
-<body>
-    <!-- Header -->
-    <%- include("./partials/header") %>
-    <!-- /Header -->
+    <body>
+        <!-- Header -->
+        <%- include("./partials/header") %>
+            <!-- /Header -->
 
-    <!-- Login -->
-    <div class="container form-login-register">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="login-title">Ingresar</h2>
+            <!-- Login -->
+            <div class="container form-login-register">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="login-title">Ingresar</h2>
+                    </div>
+                    <div class="col-12">
+                        <form action="/users/login" method="GET">
+                            <div class="formulario">
+                                <label for="usuario">Usuario:</label>
+                                <input type="text" class="form-login" id="usuario" name="usuario" required>
+                            </div>
+                            <div class="formulario">
+                                <label for="contrasena">Contraseña:</label>
+                                <input type="password" class="form-login" id="contrasena" name="contrasena" required>
+                            </div>
+                            <div class="formulario form-check">
+                                <input type="checkbox" class="form-checkbox" id="recordarme" name="recordarme">
+                                <label class="form-check-label" for="recordarme">Recordarme</label>
+                            </div>
+                            <button type="submit" class="button-form">Ingresar</button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="col-12">
-                <form action="/users/login" method="GET">
-                    <div class="formulario">
-                        <label for="usuario">Usuario:</label>
-                        <input type="text" class="form-login" id="usuario" name="usuario" required>
-                    </div>
-                    <div class="formulario">
-                        <label for="contrasena">Contraseña:</label>
-                        <input type="password" class="form-login" id="contrasena" name="contrasena" required>
-                    </div>
-                    <div class="formulario form-check">
-                        <input type="checkbox" class="form-checkbox" id="recordarme" name="recordarme">
-                        <label class="form-check-label" for="recordarme">Recordarme</label>
-                    </div>
-                    <button type="submit" class="button-form">Ingresar</button>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <!-- footer -->
-    <%- include("./partials/footer") %>
-    <!-- /footer -->
-</body>
+            <!-- footer -->
+            <%- include("./partials/footer") %>
+                <!-- /footer -->
+    </body>
 
 </html>

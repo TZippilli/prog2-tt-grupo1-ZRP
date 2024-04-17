@@ -1,5 +1,5 @@
 const db = {
-    users:[
+    users: [
         {
             email: "juanperez@gmail.com",
             nombre: "juanperez",

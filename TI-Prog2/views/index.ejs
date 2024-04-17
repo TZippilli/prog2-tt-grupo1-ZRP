@@ -2,69 +2,82 @@
 <html lang="es">
 <!-- Include Head -->
 <%- include("./partials/head") %>
-<body>
-	
-	<!-- Header -->
-	<%- include("./partials/header") %>
-	<!-- /Header -->
-	
-	<!-- Banner -->
-	<div class="banner">
-		<img src="images/auto-banner.jpeg" alt="Banner de ofertas">
-	</div>
-	<!-- /Banner -->
 
-	<!-- Novedades -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Novedades</h2>
-			</div>
-			
-			<% for (let data = 0; data < 4; data++) { %>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/product">
-							<figure class="product-box_image">
-								<img class="fotoIndex" src="/images/products/<%= db.productos[data].imagen %>">
-							</figure>
-							<article class="product-box_data">
-								<h2><%= db.productos[data].nombre %></h2>
-								<p><%= db.productos[data].descripcion %></p>
-								<p>Comentarios: <%= db.productos[data].comentarios.length %></p>
-							</article>
-						</a>
-					</section>
-				</div>
-			<% } %>
-			
-	<!-- /Novedades -->
-	<!-- Más comentados -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Más comentados</h2>
-			</div>
-			<% for (let data = 0; data < 4; data++) { %>
-				<div class="col-12 col-sm-6 col-lg-3">
-					<section class="product-box">
-						<a href="/product">
-							<figure class="product-box_image">
-								<img class="fotoIndex" src="/images/products/<%= db.productos[data].imagen %>">
-							</figure>
-							<article class="product-box_data">
-								<h2><%= db.productos[data].nombre %></h2>
-								<p><%= db.productos[data].descripcion %></p>
-								<p>Comentarios: <%= db.productos[data].comentarios.length %></p>
-							</article>
-						</a>
-					</section>
-				</div>
-			<% } %>
-			
+	<body>
 
-	<!-- footer -->
-	<%- include("./partials/footer") %>
-	<!-- /footer -->
-</body>	
+		<!-- Header -->
+		<%- include("./partials/header") %>
+			<!-- /Header -->
+
+			<!-- Banner -->
+			<div class="banner">
+				<img src="images/auto-banner.jpeg" alt="Banner de ofertas">
+			</div>
+			<!-- /Banner -->
+
+			<!-- Novedades -->
+			<div class="container products-wrapper">
+				<div class="row">
+					<div class="col-12">
+						<h2 class="products-title">Novedades</h2>
+					</div>
+
+					<% for (let data=0; data < 4; data++) { %>
+						<div class="col-12 col-sm-6 col-lg-3">
+							<section class="product-box">
+								<a href="/product">
+									<figure class="product-box_image">
+										<img class="fotoIndex" src="/images/products/<%= db.productos[data].imagen %>">
+									</figure>
+									<article class="product-box_data">
+										<h2>
+											<%= db.productos[data].nombre %>
+										</h2>
+										<p>
+											<%= db.productos[data].descripcion %>
+										</p>
+										<p>Comentarios: <%= db.productos[data].comentarios.length %>
+										</p>
+									</article>
+								</a>
+							</section>
+						</div>
+						<% } %>
+
+							<!-- /Novedades -->
+							<!-- Más comentados -->
+							<div class="container products-wrapper">
+								<div class="row">
+									<div class="col-12">
+										<h2 class="products-title">Más comentados</h2>
+									</div>
+									<% for (let data=0; data < 4; data++) { %>
+										<div class="col-12 col-sm-6 col-lg-3">
+											<section class="product-box">
+												<a href="/product">
+													<figure class="product-box_image">
+														<img class="fotoIndex"
+															src="/images/products/<%= db.productos[data].imagen %>">
+													</figure>
+													<article class="product-box_data">
+														<h2>
+															<%= db.productos[data].nombre %>
+														</h2>
+														<p>
+															<%= db.productos[data].descripcion %>
+														</p>
+														<p>Comentarios: <%= db.productos[data].comentarios.length %>
+														</p>
+													</article>
+												</a>
+											</section>
+										</div>
+										<% } %>
+
+
+											<!-- footer -->
+											<%- include("./partials/footer") %>
+												<!-- /footer -->
+	</body>
+
 </html>
