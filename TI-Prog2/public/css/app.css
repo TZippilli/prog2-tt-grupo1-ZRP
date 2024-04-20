@@ -16,6 +16,21 @@
 
 }
 
+.titulo {
+  text-align: center;
+  font-family: 'Belgian Expanded', sans-serif;
+  background-color: #f12121;
+  font-size: 20px;
+  color: #000;
+  text-transform: uppercase;
+  border-radius: 10px;
+  box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 50%;
+  margin: auto;
+  margin-bottom: 0px;
+}
+
+
 
 /*====== Basics ======*/
 * {
@@ -164,9 +179,12 @@ hr {
   background-size: cover;
   background-position: center center;
   height: 100px;
+  padding-bottom: 10px;
 }
 
-
+.info-usuario{
+  padding-top: 10px;
+}
 /*====== Products ======*/
 .products-wrapper {
   margin-top: 30px;
@@ -284,13 +302,13 @@ hr {
 
 .footer-data h2 {
   color: var(--gray);
-  font-size: 2.4em;
+  font-size: 1.5em;
   font-weight: 400;
 }
 
 .footer-data p {
   color: var(--gray);
-  font-size: 1.5em;
+  font-size: 1.0em;
   font-weight: 300;
 }
 
@@ -490,9 +508,7 @@ hr {
   color: #fff;
 }
 
-.row {
-  padding-top: 20px;
-}
+.row {}
 
 /* Estilos forms register, login, editar perfil y agregar productos */
 body {
