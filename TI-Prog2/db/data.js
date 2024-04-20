@@ -6,7 +6,7 @@ const db = {
             contrasenia: "juanito10",
             fechaNacimiento: "1990-05-25",
             numeroDocumento: 87654321,
-            foto: "juanito.png"
+            foto: "juanita.jpeg"
         },
         {
             email: "mariagomez@gmail.com",
@@ -51,12 +51,12 @@ const db = {
                 {
                     nombre: "juanperez",
                     comentario: "Buen chasis",
-                    foto: ""
+                    foto: "juanita.jpeg"
                 },
                 {
                     nombre: "mariagomez",
                     comentario: "¿Hacen descuentos a gente nacida en Italia?",
-                    foto: ""
+                    foto: "rob.png"
                 }
             ]
         },
@@ -68,12 +68,12 @@ const db = {
                 {
                     nombre: "pedroaguilar",
                     comentario: "Comentario 1",
-                    foto: ""
+                    foto: "angel.avif"
                 },
                 {
                     nombre: "lauratorres",
                     comentario: "Comentario 2",
-                    foto: ""
+                    foto: "julieta.avif"
                 }
             ]
         },
@@ -85,12 +85,12 @@ const db = {
                 {
                     nombre: "carlosrojas",
                     comentario: "Hermoso",
-                    foto: ""
+                    foto: "mike.jpeg"
                 },
                 {
                     nombre: "juanperez",
                     comentario: "Buen chasis",
-                    foto: ""
+                    foto: "juanita.jpeg"
                 }
             ]
         },
@@ -102,16 +102,17 @@ const db = {
                 {
                     nombre: "mariagomez",
                     comentario: "Buena nave",
-                    foto: ""
+                    foto: "rob.jpg"
                 },
                 {
                     nombre: "pedroaguilar",
                     comentario: "¿Permutas?",
-                    foto: ""
+                    foto: "angel.avif"
                 }
             ]
         }
     ]
 };
 
-module.exports = db
+
+module.exports = db; 

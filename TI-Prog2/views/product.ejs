@@ -30,19 +30,19 @@
 							<section class="comments">
 								<% producto.comentarios.forEach(function(comentario) { %>
 									<article>
-										<img src="images/foto-perfil.webp"alt="">
 										<div class="data">
+											<img src="/images/users/<%= comentario.foto %>" alt="Foto de perfil" class="user-avatar">
 											<p class="user">
 												<strong> <a href="/profile">
-														<%= comentario.nombre %>:
-													</a> </strong>
+													<%= comentario.nombre %>:
+												</a> </strong>
 												<%= comentario.comentario %>
 											</p>
 										</div>
 									</article>
-									<% }); %>
-
+								<% }); %>
 							</section>
+							
 							<form class="form">
 								<input class="form-input" type="text" value="" placeholder="Agregar comentario">
 								<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
