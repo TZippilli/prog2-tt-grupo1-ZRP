@@ -57,8 +57,14 @@ const db = {
                     nombre: "mariagomez",
                     comentario: "¿Hacen descuentos a gente nacida en Italia?",
                     foto: "rob.png"
+                },
+                {
+                    nombre: "carlosrojas",
+                    comentario: "Espectacular el color!",
+                    foto: "mike.jpeg"
                 }
             ]
+            
         },
         {
             imagen: "foto4.png",
