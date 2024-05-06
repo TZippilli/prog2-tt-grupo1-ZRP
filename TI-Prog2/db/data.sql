@@ -8,7 +8,7 @@ CREATE TABLE users (
     email 				VARCHAR(250) 	UNIQUE NOT NULL,
     nombre 				VARCHAR(250) 	NOT NULL,
     contrasenia 		VARCHAR(250) 	NOT NULL,
-    fecha				DATETIME 		NOT NULL,
+    fechaNacimiento		DATETIME 		NOT NULL,
     numeroDocumento 	INT 			NOT NULL,
     foto 				VARCHAR(250) 	NOT NULL,	
     createdAt 			TIMESTAMP 		DEFAULT CURRENT_TIMESTAMP ,
