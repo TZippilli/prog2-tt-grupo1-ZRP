@@ -71,7 +71,7 @@ insert into products (id, clienteId, nombreProduct, imagenProduct, descripcionPr
 values (default, 2, "Porsche GT3 RS", "foto4.png", "Auto de lujo traido directamente de Alemania");
 
 insert into products (id, clienteId, nombreProduct, imagenProduct, descripcionProduct)
-values (default, 1, "Pagani Zonda", "foto2.png", "Magia italiana");
+values (default, 1, "Pagani Zonda", "foto2.jpeg", "Magia italiana");
 
 insert into products (id, clienteId, nombreProduct, imagenProduct, descripcionProduct)
 values (default, 4, "Ferrari F90", "foto1.png", "320 caballos de fuerza");
