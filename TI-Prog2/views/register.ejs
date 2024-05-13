@@ -17,30 +17,31 @@
                     <div class="col-12">
                         <form action="/profile/edit" method="GET" class="form-login-register">
                             <div class="formulario">
-                                <label for="usuario" style="font-size: 18px;">Usuario:</label>
-                                <input type="text" class="form-login" id="email" name="email" required>
+                                <label for="email" style="font-size: 18px;">Correo electrónico:</label>
+                                <input type="email" class="form-login" id="usuario" name="email" required>
                             </div>
                             <div class="formulario">
-                                <label for="email" style="font-size: 18px;">Correo electrónico:</label>
-                                <input type="email" class="form-login" id="usuario" name="usuario" required>
+                                <label for="usuario" style="font-size: 18px;">Usuario:</label>
+                                <input type="text" class="form-login" id="email" name="nombre" required>
                             </div>
+
                             <div class="formulario">
                                 <label for="contrasena" style="font-size: 18px;">Contraseña:</label>
-                                <input type="password" class="form-login" id="contrasena" name="contrasena" required>
+                                <input type="password" class="form-login" id="contrasena" name="contrasenia" required>
                             </div>
                             <div class="formulario">
                                 <label for="fecha_nacimiento" style="font-size: 18px;">Fecha de Nacimiento:</label>
-                                <input type="date" class="form-login" id="fecha_nacimiento" name="fecha_nacimiento"
+                                <input type="date" class="form-login" id="fecha_nacimiento" name="fechaNacimiento"
                                     required>
                             </div>
                             <div class="formulario">
                                 <label for="nro_documento" style="font-size: 18px;">Nro de Documento:</label>
-                                <input type="number" class="form-login" id="nro_documento" name="nro_documento"
+                                <input type="number" class="form-login" id="nro_documento" name="numeroDocumento"
                                     required>
                             </div>
                             <div class="formulario">
                                 <label for="foto_perfil" style="font-size: 18px;">Foto de Perfil:</label>
-                                <input type="text" class="form-login" id="foto_perfil" name="foto_perfil" required>
+                                <input type="text" class="form-login" id="foto_perfil" name="foto" required>
                             </div>
                             <button type="submit" class="button-form">Registrarse</button>
                         </form>

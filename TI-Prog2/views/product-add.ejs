@@ -18,17 +18,17 @@
 					<h2 class="col-12">
 						<form action="/profile/edit" method="GET" class="form-login-register">
 							<div class="formulario">
+								<label for="nombre" style="font-size: 18px;">Nombre del Producto:</label>
+								<input type="text" class="form-login" id="nombre" name="nombreProduct" required>
+							</div>
+							<div class="formulario">
 								<label for="imagen" style="font-size: 18px;">Imagen:</label>
-								<input type="text" class="form-login" id="imagen" name="imagen" accept="image/*"
+								<input type="text" class="form-login" id="imagen" name="imagenProduct" accept="image/*"
 									required>
 							</div>
 							<div class="formulario">
-								<label for="nombre" style="font-size: 18px;">Nombre del Producto:</label>
-								<input type="text" class="form-login" id="nombre" name="nombre" required>
-							</div>
-							<div class="formulario">
 								<label for="descripcion" style="font-size: 18px;">Descripción:</label>
-								<textarea class="form-login" id="descripcion" name="descripcion" rows="4"
+								<textarea class="form-login" id="descripcion" name="descripcionProduct" rows="4"
 									required></textarea>
 							</div>
 							<button type="submit" class="button-form">Enviar</button>
