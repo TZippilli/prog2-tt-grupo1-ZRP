@@ -33,5 +33,6 @@ module.exports = function(sequelize, DataTypes) {
     };
     
     let Comentarios = sequelize.define(alias, cols, config);
+    
     return Comentarios;
 };

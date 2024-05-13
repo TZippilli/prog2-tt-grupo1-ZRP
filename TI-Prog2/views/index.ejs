@@ -22,23 +22,30 @@
 						<h2 class="products-title">Novedades</h2>
 					</div>
 
-					<% for (let i = 0; i < productos.length; i++) { %>
+					<% for (let i=0; i < productos.length; i++) { %>
 						<div class="col-12 col-sm-6 col-lg-3">
 							<section class="product-box">
 								<a href="/product/<%= productos[i].id %>">
 									<figure class="product-box_image">
-										<img class="fotoIndex" src="/images/products/<%= productos[i].imagenProduct %>" alt="<%= productos[i].nombreProduct %>">
+										<img class="fotoIndex" src="/images/products/<%= productos[i].imagenProduct %>"
+											alt="<%= productos[i].nombreProduct %>">
 									</figure>
 									<article class="product-box_data">
-										<h2><%= productos[i].nombreProduct %></h2>
-										<p><%= productos[i].descripcionProduct %></p>
-										<p>Comentarios: <%= productos[i].comentarios ? productos[i].comentarios.length : 0 %></p>
+										<h2>
+											<%= productos[i].nombreProduct %>
+										</h2>
+										<p>
+											<%= productos[i].descripcionProduct %>
+										</p>
+										<p>Comentarios: <%= productos[i].comentarios ? productos[i].comentarios.length :
+												0 %>
+										</p>
 									</article>
 								</a>
 							</section>
 						</div>
-					<% } %>
-					
+						<% } %>
+
 
 							<!-- /Novedades -->
 							<!-- Más comentados -->
@@ -47,22 +54,30 @@
 									<div class="col-12">
 										<h2 class="products-title">Más comentados</h2>
 									</div>
-									<% for (let i = 0; i < productos.length; i++) { %>
+									<% for (let i=0; i < productos.length; i++) { %>
 										<div class="col-12 col-sm-6 col-lg-3">
 											<section class="product-box">
 												<a href="/product/<%= productos[i].id %>">
 													<figure class="product-box_image">
-														<img class="fotoIndex" src="/images/products/<%= productos[i].imagenProduct %>" alt="<%= productos[i].nombreProduct %>">
+														<img class="fotoIndex"
+															src="/images/products/<%= productos[i].imagenProduct %>"
+															alt="<%= productos[i].nombreProduct %>">
 													</figure>
 													<article class="product-box_data">
-														<h2><%= productos[i].nombreProduct %></h2>
-														<p><%= productos[i].descripcionProduct %></p>
-														<p>Comentarios: <%= productos[i].comentarios ? productos[i].comentarios.length : 0 %></p>
+														<h2>
+															<%= productos[i].nombreProduct %>
+														</h2>
+														<p>
+															<%= productos[i].descripcionProduct %>
+														</p>
+														<p>Comentarios: <%= productos[i].comentarios ?
+																productos[i].comentarios.length : 0 %>
+														</p>
 													</article>
 												</a>
 											</section>
 										</div>
-									<% } %>
+										<% } %>
 
 
 											<!-- footer -->
