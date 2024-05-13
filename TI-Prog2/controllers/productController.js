@@ -6,7 +6,8 @@ const productController = {
 
         db.Producto.findByPk(productId)
             .then(function (producto) {
-                res.render('product', { producto: producto });
+
+                res.render('product', { producto: producto, comentarios: [] });
             })
             .catch(function (error) {
                 return console.log(error);

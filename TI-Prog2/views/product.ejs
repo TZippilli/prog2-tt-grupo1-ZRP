@@ -11,7 +11,7 @@
 			<div class="container products-wrapper">
 				<div class="d-flex align-items-center">
 					<h2 class="products-title">
-						<%= producto.nombre %>
+						<%= producto.nombreProduct %>
 					</h2>
 					<p class="product-detail-description">
 						<a href="/product/add">Editar</a>
@@ -21,22 +21,22 @@
 					<div class="row">
 
 						<article class="col-12 col-lg-8 product-detail-info">
-							<img src="/images/products/<%= producto.imagen %>" alt="" class="product-detail-img">
+							<img src="/images/products/<%= producto.imagenProduct %>" alt="" class="product-detail-img">
 							<p class="product-detail-description">
-								<%= producto.descripcion %>
+								<%= producto.descripcionProduct %>
 							</p>
 						</article>
 						<div class="col-12 col-lg-4">
 							<section class="comments">
-								<% producto.comentarios.forEach(function(comentario) { %>
+								<% comentarios.forEach(function(comentario) { %>
 									<article>
 										<div class="data">
-											<img src="/images/users/<%= comentario.foto %>" alt="Foto de perfil" class="user-avatar">
+											<img src="/images/users/<%=  %>" alt="Foto de perfil" class="user-avatar">
 											<p class="user">
 												<strong> <a href="/profile">
-													<%= comentario.nombre %>:
+													<%=  %>:
 												</a> </strong>
-												<%= comentario.comentario %>
+												<%=  %>
 											</p>
 										</div>
 									</article>
