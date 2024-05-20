@@ -1,4 +1,5 @@
 const session = require('express-session');
+const db = require("./database/models")
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -47,7 +48,28 @@ app.use(function(req, res, next){
   return next()
 });
 
+/*PASAR INFO DE SESSION A LOCALS*/
+app.use(function(req, res, next) {
+  if (req.cookies.userId != undefined && req.session.user == undefined) {
+    let id = req.cookies.userId; // 4, 5, 6
 
+
+      db.User.findByPk(id)
+      
+      .then(function(result) {
+        req.session.user = result;
+        req.locals.user = result;
+        return next();
+      }
+      
+      .catch(function (error) {
+        return console.log(error);
+    }));
+  } else {
+    return next()
+    
+  }
+});
 
 
 // catch 404 and forward to error handler
