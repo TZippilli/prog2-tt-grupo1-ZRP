@@ -1,5 +1,5 @@
 const session = require('express-session');
-const db = require("./database/models")
+const db = require("./database/models");
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');

@@ -1,4 +1,5 @@
 const db = require('../database/models');
+const bcrypt = require("bcryptjs")
 
 const usersController = {
     login: function(req, res, next) {
