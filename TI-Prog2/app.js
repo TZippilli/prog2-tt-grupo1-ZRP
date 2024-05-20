@@ -1,3 +1,4 @@
+const session = require('express-session');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -29,6 +30,23 @@ app.use('/users', usersRouter);
 app.use('/product', productRouter);
 app.use('/profile', profileRouter);
 app.use('/search-results', resultsRouter);
+
+
+/*CONFIGURACION SESION*/
+
+app.use(session({
+  secret: "myapp",
+  resave: false,
+  saveUninitialized:  true
+}));
+
+app.use(function(req, res, next){
+  if(req.session.user != undefined) {
+    res.locals.user = req.session.user;
+  }
+  return next()
+});
+
 
 
 

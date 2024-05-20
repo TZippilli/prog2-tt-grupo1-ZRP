@@ -2,7 +2,11 @@
 <html lang="es">
 <!-- Include Head -->
 
-<%- include("./partials/head") %>
+<% if (locals.user != undefined) { %>
+	<%- include('./partials/headerLogueado') %>
+<% } else { %>
+	<%- include('./partials/header') %>
+<% } %>
 
 	<body>
 		<!-- Header -->

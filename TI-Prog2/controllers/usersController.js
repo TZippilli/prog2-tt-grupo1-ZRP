@@ -3,6 +3,22 @@ const db = require('../database/models');
 const usersController = {
     login: function(req, res, next) {
         res.render('login');
+        let filtro = {
+            where: [{email: form.email}]
+        };
+
+        db.User.findOne(filtro)
+        .then((result)=>{
+            if(result != null){
+                req.session.user = result;
+                return res.redirect("/product");
+            } else {
+                return res.send("No hay mails parecidos a: " + form.email);
+            }
+
+        }).catch((err)=>{
+            return console.log(err);
+        })
     },
 
     profileEdit: function(req, res, next) {
@@ -15,7 +31,13 @@ const usersController = {
 
     register: function(req, res, next) {
         res.render("register");
+    },
+    
+    logout: (req, res) => {
+        req.session.destroy();
+        return res.redirect("/");
     }
+    
 }
 
 module.exports = usersController;
