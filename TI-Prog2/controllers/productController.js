@@ -2,6 +2,8 @@ const db = require('../database/models');
 
 const productController = {
     index: function (req, res, next) {
+
+
         const productId = req.params.id;
 
         db.Producto.findByPk(productId)
@@ -17,6 +19,7 @@ const productController = {
     newProd: function (req, res) {
         res.render("product-add", { db: db });
     }
+    
 }
 
 module.exports = productController;

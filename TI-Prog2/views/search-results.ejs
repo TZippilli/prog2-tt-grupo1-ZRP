@@ -29,16 +29,17 @@
 							<section class="product-box">
 								<a href="/product">
 									<figure class="product-box_image">
-										<img class="fotoIndex" src="/images/products/<%= db.productos[data].imagen %>">
+										<img class="fotoIndex" src="/images/products/<%=  producto[i].imagenProduct  %>">
 									</figure>
 									<article class="product-box_data">
 										<h2>
-											<%= db.productos[data].nombre %>
+											<%= producto[i].nombreProduct %>
 										</h2>
 										<p>
-											<%= db.productos[data].descripcion %>
+											<%= producto[i].descripcionProduct %>
 										</p>
-										<p>Comentarios: <%= db.productos[data].comentarios.length %>
+										<p>Comentarios: <%= producto[i].comentarios ? producto[i].comentarios.length :
+											0 %>
 										</p>
 									</article>
 								</a>
