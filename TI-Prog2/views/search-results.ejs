@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Include Head -->
+<%- include("./partials/head") %>
+
 
 <% if (locals.user != undefined) { %>
 	<%- include('./partials/headerLogueado') %>
@@ -10,7 +12,6 @@
 
 	<body>
 		<!-- Header -->
-		<%- include("./partials/header") %>
 
 			<!-- /Header -->
 
@@ -24,23 +25,21 @@
 			</div>
 			<div class="container products-wrapper">
 				<div class="row">
-					<% for (let data=0; data < 4; data++) { %>
+					<% for (let i=0; i < productos.length; i++) { %>
 						<div class="col-12 col-sm-6 col-lg-3">
 							<section class="product-box">
 								<a href="/product">
 									<figure class="product-box_image">
-										<img class="fotoIndex" src="/images/products/<%=  producto[i].imagenProduct  %>">
+										<img class="fotoIndex" src="/images/products/<%=  productos[i].imagenProduct  %>">
 									</figure>
 									<article class="product-box_data">
 										<h2>
-											<%= producto[i].nombreProduct %>
+											<%= productos[i].nombreProduct %>
 										</h2>
 										<p>
-											<%= producto[i].descripcionProduct %>
+											<%= productos[i].descripcionProduct %>
 										</p>
-										<p>Comentarios: <%= producto[i].comentarios ? producto[i].comentarios.length :
-											0 %>
-										</p>
+										
 									</article>
 								</a>
 							</section>

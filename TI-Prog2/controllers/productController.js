@@ -6,7 +6,14 @@ const productController = {
 
         const productId = req.params.id;
 
-        db.Producto.findByPk(productId)
+        let criterio = {
+            include: [
+                {association: "productComentario"},
+                {association: ""}
+            ]
+        }
+
+        db.Producto.findByPk(productId, criterio)
             .then(function (producto) {
 
                 res.render('product', { producto: producto, comentarios: [] });
