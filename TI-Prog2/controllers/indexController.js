@@ -31,8 +31,85 @@ const indexController = {
         }).catch((err) => {
             return console.log(err);
         });
-    }
-    
+
+        
+    },
+
+
+
+    /* REVISAR CLASE CRUD
+    detalle: function(req, res) {
+        let idProduct = req.params.id;
+  
+        db.Producto.findByPk(idProduct)
+        .then((result) => {
+          return res.render("product", {productos: result});
+        }).catch((err) => {
+          return console.log(err);
+        });
+      },
+      showFormCreate: function(req,res) {
+        return res.render("product-add");
+      },
+      showFormUpdate: function(req,res) {
+        let idProduct = req.params.id;
+  
+        db.Producto.findByPk(idProduct)
+        .then((result) => {
+            return res.render("updateMovie", {movie : result})  
+        }).catch((err) => {
+          return console.log(err);
+        });
+  
+      },
+      
+      store: function(req, res) {
+        let form = req.body;
+  
+        db.Producto.create(form)
+        .then((result) => {
+            return res.redirect("/product")
+        }).catch((err) => {
+          return console.log(err);
+        });
+        
+  
+       
+      },
+      update: function(req, res) {
+        let form = req.body;
+         let filtrado = {
+          where: {
+            id: form.id
+          }
+        } 
+  
+        db.Producto.update(form, filtrado)
+        .then((result) => {
+          return res.redirect("/product/id/" + form.id)
+        }).catch((err) => {
+          return console.log(err);
+        });
+  
+      },
+      delete: function(req, res) {
+        let form = req.body;
+        
+        let filtrado = {
+          where: {
+            id: form.id
+          }
+        }
+  
+        db.Producto.destroy(filtrado)
+        .then((result) => {
+          return res.redirect("/product/");
+        }).catch((err) => {
+          return console.log(err);
+        });
+        
+      }
+    */
 }
 
 module.exports = indexController;
