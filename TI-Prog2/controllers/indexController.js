@@ -27,7 +27,6 @@ const indexController = {
         db.Producto.findAll(filtrado)
         .then((result) => {
             return res.render("search-results", {productos : result})
-            return res.send(result);
         }).catch((err) => {
             return console.log(err);
         });

@@ -5,62 +5,65 @@
 
 	<body>
 		<!-- Header -->
-		<% if (locals.user != undefined) { %>
+		<% if (locals.user !=undefined) { %>
 			<%- include('./partials/headerLogueado') %>
-		<% } else { %>
-			<%- include('./partials/header') %>
-		<% } %>
+				<% } else { %>
+					<%- include('./partials/header') %>
+						<% } %>
 
 
-			<div class="container products-wrapper">
-				<div class="d-flex align-items-center">
-					<h2 class="products-title">
-						<%= producto.nombreProduct %>
-					</h2>
-					<p class="product-detail-description">
-						<a href="/product/add">Editar</a>
-					</p>
-				</div>
-				<div class="product-detail">
-					<div class="row">
+							<div class="container products-wrapper">
+								<div class="d-flex align-items-center">
+									<h2 class="products-title">
+										<%= producto.nombreProduct %>
+									</h2>
+									<p class="product-detail-description">
+										<a href="/product/edit/<%= producto.id %>">Editar</a>
+									</p>
+								</div>
+								<div class="product-detail">
+									<div class="row">
 
-						<article class="col-12 col-lg-8 product-detail-info">
-							<img src="/images/products/<%= producto.imagenProduct %>" alt="" class="product-detail-img">
-							<p class="product-detail-description">
-								<%= producto.descripcionProduct %>
-							</p>
-						</article>
-						<div class="col-12 col-lg-4">
-							<section class="comments">
-								<% comentarios.forEach(function(comentario) { %>
-									<article>
-										<div class="data">
-											<img src="/images/users/<%=  %>" alt="Foto de perfil" class="user-avatar">
-											<p class="user">
-												<strong> <a href="/profile">
-													<%=  %>:
-												</a> </strong>
-												<%=  %>
+										<article class="col-12 col-lg-8 product-detail-info">
+											<img src="/images/products/<%= producto.imagenProduct %>" alt=""
+												class="product-detail-img">
+											<p class="product-detail-description">
+												<%= producto.descripcionProduct %>
 											</p>
+										</article>
+										<div class="col-12 col-lg-4">
+											<section class="comments">
+												<% comentarios.forEach(function(comentario) { %>
+													<article>
+														<div class="data">
+															<img src="/images/users/<%= producto.comentario %>" alt="Foto de perfil"
+																class="user-avatar">
+															<p class="user">
+																<strong> <a href="/profile">
+																		<%= %>:
+																	</a> </strong>
+																<%= %>
+															</p>
+														</div>
+													</article>
+													<% }); %>
+											</section>
+
+											<form class="form">
+												<input class="form-input" type="text" value=""
+													placeholder="Agregar comentario" name="comentario">
+												<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+											</form>
+											<hr>
 										</div>
-									</article>
-								<% }); %>
-							</section>
-							
-							<form class="form">
-								<input class="form-input" type="text" value="" placeholder="Agregar comentario" name="comentario">
-								<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-							</form>
-							<hr>
-						</div>
-					</div>
-				</div>
-			</div>
+									</div>
+								</div>
+							</div>
 
 
-			<!-- footer -->
-			<%- include("./partials/footer") %>
-				<!-- /footer -->
+							<!-- footer -->
+							<%- include("./partials/footer") %>
+								<!-- /footer -->
 
 	</body>
 

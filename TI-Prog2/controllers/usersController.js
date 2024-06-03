@@ -34,7 +34,7 @@ const usersController = {
         let errors = validationResult(req)
         if (errors.isEmpty()) {
             let form = req.body;
-            let user {
+            let user = {
                 name: form.nombre, //coregir
                 email: form.email,
                 password: bcrypt.hashSync(form.password, 10)
@@ -48,7 +48,7 @@ const usersController = {
                 });
 
 
-        } else{
+        }  else{
             return res.render("register",{ //no tenemos registerUser, ver como lo adaptamos a lo nuestro
                 errors:errors.mapped(),
                 old: req.body
@@ -59,7 +59,7 @@ const usersController = {
         }
 
             
-    }
+    },
     profileEdit: function (req, res, next) {
         res.render("profile-edit", { db: db });
     },

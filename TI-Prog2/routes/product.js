@@ -7,6 +7,6 @@ const productController = require("../controllers/productController");
 // agregamos el id para buscar por prod. 
 router.get("/:id", productController.index);
 
-router.get("/add", productController.newProd);
+router.get("/edit/:id", productController.editProd);
 
 module.exports = router;

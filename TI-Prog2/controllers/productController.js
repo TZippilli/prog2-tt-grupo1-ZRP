@@ -6,14 +6,14 @@ const productController = {
 
         const productId = req.params.id;
 
-        let criterio = {
-            include: [
-                {association: "productComentario"},
-                {association: ""}
-            ]
-        }
+//        let criterio = {
+  //          include: [
+  //              {association: "productComentario"},
+   //             {association: ""}
+  //          ]
+   //     }
 
-        db.Producto.findByPk(productId, criterio)
+        db.Producto.findByPk(productId) //agregar ,criterio NO FUNCIONA
             .then(function (producto) {
 
                 res.render('product', { producto: producto, comentarios: [] });
@@ -23,8 +23,14 @@ const productController = {
             });
     },
 
-    newProd: function (req, res) {
-        res.render("product-add", { db: db });
+    editProd: function (req, res) {
+        let id = req.params.id
+        db.Producto.findByPk (id)
+        .then (function (result) {
+            return res.render ("product-add", {productos: result})
+        }) .catch(function (err) {
+            console.log (err)
+        })
     }
     
 }
