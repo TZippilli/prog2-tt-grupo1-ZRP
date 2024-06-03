@@ -31,6 +31,25 @@ const productController = {
         }) .catch(function (err) {
             console.log (err)
         })
+    },
+
+    create: function(req, res) {
+        db.Usuario.findOne()
+            .then(function(results){
+                return res.render('product-add', {usuario: results});
+            })
+            .catch(function(err){
+                console.log(err);
+            });
+    },
+    store: function(req, res) {
+        let form = req.body;
+        db.Producto.create(form)
+        .then((result) => {
+            return res.redirect("/")
+        }).catch((err) => {
+          return console.log(err);
+        });
     }
     
 }
