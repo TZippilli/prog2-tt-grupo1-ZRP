@@ -26,6 +26,9 @@
                             <div class="formulario">
                                 <label for="usuario" style="font-size: 18px;">Usuario:</label>
                                 <input type="text" class="form-login" id="email" name="nombre" required>
+                                <% if (locals.errors && errors.nombre) { %>
+                                    <p class="error"><%= errors.nombre %></p>
+                                <% } %>
                             </div>
 
                             <div class="formulario">
