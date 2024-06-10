@@ -58,7 +58,7 @@ const productController = {
     
       },
     
-      create: function (req, res) {
+    create: function (req, res) {
         db.Usuario.findOne()
     
         if (req.session.user != undefined) {
@@ -80,7 +80,7 @@ const productController = {
           });
       },
     
-      store: function (req, res) {
+    store: function (req, res) {
         let form = req.body;
     
         db.Producto.create(form)
@@ -90,10 +90,9 @@ const productController = {
             return console.log(err);
           });
     
-    
-    
       },
-      update: function (req, res) {
+
+    update: function (req, res) {
         let form = req.body;
         let filtrado = {
           where: {
@@ -109,7 +108,7 @@ const productController = {
           });
     
       },
-      destroy: function (req, res) {
+    destroy: function (req, res) {
         let form = req.body;
     
         let filtrado = {

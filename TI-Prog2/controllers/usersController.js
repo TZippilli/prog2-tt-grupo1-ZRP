@@ -3,18 +3,18 @@ const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
 
 const usersController = {
-    login: function(req, res, next) {
+    login: function (req, res, next) {
         if (req.session.user !== undefined) {
-            return res.redirect("/users/profile/id/" + req.session.user.id); 
+            return res.redirect("/users/profile/id/" + req.session.user.id);
         } else {
             return res.render('login', { title: "Login" });
         }
 
-        
+
     },
 
-    loginUser: function(req, res, next) {
-        let form = req.body; 
+    loginUser: function (req, res, next) {
+        let form = req.body;
         let filtro = { where: { email: form.email } };
 
         db.User.findOne(filtro)
@@ -42,43 +42,46 @@ const usersController = {
             let user = {
                 name: form.nombre,
                 email: form.email,
-                password: bcrypt.hashSync(form.password, 10)
+                password: bcrypt.hashSync(form.contrasenia, 10),
+                fechaNacimiento: form.fechaNacimiento,
+                numeroDocumento: form.numeroDocumento,
+                foto: form.foto
             };
 
             db.User.create(user)
                 .then((result) => {
-                    return res.redirect("/login");
+                    return res.redirect("/");
                 }).catch((err) => {
                     return console.log(err);
                 });
 
         } else {
-            return res.render("register", { 
+            return res.render("register", {
                 errors: errors.mapped(),
                 old: req.body
             });
         }
     },
 
-    profileEdit: function(req, res, next) {
+    profileEdit: function (req, res, next) {
         res.render("profile-edit", { db: db });
     },
 
-    profile: function(req, res, next) {
+    profile: function (req, res, next) {
         res.render("profile", { db: db });
     },
 
-    register: function(req, res, next) {
-        if (req.session.user !== undefined) { 
+    register: function (req, res, next) {
+        if (req.session.user !== undefined) {
             return res.redirect("/");
         } else {
             return res.render("register");
         }
     },
-     
-    logout: function(req, res) {
+
+    logout: function (req, res) {
         req.session.destroy();
-        res.clearCookie("userId"); 
+        res.clearCookie("userId");
         return res.redirect("/");
     }
 };
