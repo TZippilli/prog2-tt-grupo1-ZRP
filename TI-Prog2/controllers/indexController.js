@@ -20,19 +20,23 @@ const indexController = {
 
     let filtrado = {
       where: {
-        nombreProduct: { [op.like]: "%" + search + "%" }
-      }
-    };
+        [op.or]: [
+          { nombreProduct: { [op.like]: "%" + search + "%" } },
+          { descripcionProduct: { [op.like]: "%" + search + "%" } }
+        ]
+      },
+    }
+
 
     db.Producto.findAll(filtrado)
-      .then((result) => {
-        return res.render("search-results", { productos: result })
-      }).catch((err) => {
-        return console.log(err);
-      });
+        .then((result) => {
+          return res.render("search-results", { productos: result })
+        }).catch((err) => {
+          return console.log(err);
+        });
 
 
+    }
   }
-}
 
 module.exports = indexController;
