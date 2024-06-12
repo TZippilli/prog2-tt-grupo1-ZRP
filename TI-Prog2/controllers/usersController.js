@@ -4,31 +4,28 @@ const { validationResult } = require("express-validator");
 
 const usersController = {
     login: function (req, res, next) {
-        if (req.session.user !== undefined) {
-            return res.redirect("/users/profile/id/" + req.session.user.id);
-        } else {
-            return res.render('login', { title: "Login" });
-        }
+        res.render('login');
 
-
-    },
-
-    loginUser: function (req, res, next) {
-        let form = req.body;
-        let filtro = { where: { email: form.email } };
+        const filtro = {
+            where: { email: req.body.email }
+        };
 
         db.User.findOne(filtro)
             .then((result) => {
-                if (result != null && bcrypt.compareSync(form.password, result.password)) {
-                    req.session.user = result;
+                if (result) {
+                    if (bcrypt.compareSync(req.body.password, result.contrasenia)) {
+                        req.session.user = result;
 
-                    if (form.recordarme !== undefined) {
-                        res.cookie("userId", result.id, { maxAge: 1000 * 60 * 35 });
+                        if (req.body.recordarme) {
+                            res.cookie("userId", result.id, { maxAge: 1000 * 60 * 35 });
+                        }
+
+                        return res.redirect("/product");
+                    } else {
+                        return res.send("Contraseña incorrecta");
                     }
-
-                    return res.redirect("/product");
                 } else {
-                    return res.send("No hay mails parecidos a: " + form.email);
+                    return res.send("No hay usuario registrado con el email: " + req.body.email);
                 }
             }).catch((err) => {
                 return console.log(err);
@@ -40,21 +37,21 @@ const usersController = {
         if (errors.isEmpty()) {
             let form = req.body;
             let user = {
-                name: form.nombre,
+                nombre: form.nombre,
                 email: form.email,
-                password: bcrypt.hashSync(form.contrasenia, 10),
-                fechaNacimiento: form.fechaNacimiento,
+                contrasenia: bcrypt.hashSync(form.contrasenia, 10),
+                fecha: form.fecha,
                 numeroDocumento: form.numeroDocumento,
-                foto: form.foto
+                foto: form.foto,
+                createdAt: new Date()
             };
-
+    
             db.User.create(user)
-                .then((result) => {
-                    return res.redirect("/");
+                .then(() => {
+                    return res.redirect("/login");
                 }).catch((err) => {
                     return console.log(err);
                 });
-
         } else {
             return res.render("register", {
                 errors: errors.mapped(),
@@ -62,7 +59,7 @@ const usersController = {
             });
         }
     },
-
+    
     profileEdit: function (req, res, next) {
         res.render("profile-edit", { db: db });
     },
@@ -72,12 +69,15 @@ const usersController = {
     },
 
     register: function (req, res, next) {
-        if (req.session.user !== undefined) {
+        if (req.session.user) {
             return res.redirect("/");
         } else {
-            return res.render("register");
+            return res.render("register", {
+                errors: {},
+                old: {}
+            });
         }
-    },
+    },        
 
     logout: function (req, res) {
         req.session.destroy();
