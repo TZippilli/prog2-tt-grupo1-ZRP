@@ -37,36 +37,36 @@ app.use('/search-results', resultsRouter);
 app.use(session({
   secret: "myapp",
   resave: false,
-  saveUninitialized:  true
+  saveUninitialized: true
 }));
 
-app.use(function(req, res, next){
-  if(req.session.user != undefined) {
+app.use(function (req, res, next) {
+  if (req.session.user != undefined) {
     res.locals.user = req.session.user;
   }
   return next()
 });
 
 /*PASAR INFO DE SESSION A LOCALS*/
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   if (req.cookies.userId != undefined && req.session.user == undefined) {
     let id = req.cookies.userId; // 4, 5, 6
 
 
-      db.User.findByPk(id)
-      
-      .then(function(result) {
+    db.User.findByPk(id)
+
+      .then(function (result) {
         req.session.user = result;
         req.locals.user = result;
         return next();
-      }
-      
-      .catch(function (error) {
-        return console.log(error);
-    }));
+      })
+
+        .catch(function (error) {
+          return console.log(error);
+        });
   } else {
     return next()
-    
+
   }
 });
 

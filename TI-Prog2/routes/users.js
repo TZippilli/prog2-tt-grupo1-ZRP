@@ -3,8 +3,6 @@ var router = express.Router();
 const usersController = require('../controllers/usersController');
 const {body} = require("express-validator")
 
-router.get("/login", usersController.login);
-router.get("/register", usersController.register);
 
 const validations = [
     body('email').isEmail().withMessage('Debes ingresar un correo electrónico válido.'),

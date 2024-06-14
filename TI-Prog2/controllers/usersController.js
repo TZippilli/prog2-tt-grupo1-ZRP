@@ -34,9 +34,9 @@ const usersController = {
 
     store: (req, res) => {
         let errors = validationResult(req);
+        let form = req.body;
         if (errors.isEmpty()) {
-            let form = req.body;
-            let user = {
+            let userPrueba = {
                 nombre: form.nombre,
                 email: form.email,
                 contrasenia: bcrypt.hashSync(form.contrasenia, 10),
@@ -45,17 +45,15 @@ const usersController = {
                 foto: form.foto,
             };
     
-            db.User.create(user)
-                .then(() => {
-                    return res.redirect("/login");
+            db.User.create(userPrueba)
+                .then((result) => {
+                    return res.redirect ("/") 
                 }).catch((err) => {
                     return console.log(err);
                 });
+        
         } else {
-            return res.render("register", {
-                errors: errors.mapped(),
-                old: req.body
-            });
+            return res.render ("register", {errors: error.mapped, old: req.body});
         }
     },
     
@@ -68,12 +66,12 @@ const usersController = {
     },
 
     register: function (req, res, next) {
-        if (req.session.user) {
+       //return res.redirect ("/")
+        if (req.session.user != undefined) {
             return res.redirect("/");
         } else {
             return res.render("register", {
-                errors: {},
-                old: {}
+                titulo: Register
             });
         }
     },        
@@ -86,3 +84,15 @@ const usersController = {
 };
 
 module.exports = usersController;
+
+
+
+
+/*
+if (results != null){
+    req.session.user = results;
+    return res.redirect("/");
+} else {
+    return res.send ("No se ecuentra el mail: " + form.email)
+}
+*/

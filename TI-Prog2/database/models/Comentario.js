@@ -37,10 +37,17 @@ module.exports = function(sequelize, DataTypes) {
     // revisar asociaciones
     Comentario.associate = function(models) {
         Comentario.belongsTo(models.Producto, {
-            as: 'producto',
+            as: 'comentarioProducto',
             foreignKey: 'productId'
         });
+    
+    Comentario.associate = function(models) {
+        Comentario.belongsTo(models.User, {
+            as: 'comentarioUsuario',
+            foreignKey: 'clienteId'
+        });
     };
+}
 
     return Comentario;
 };
