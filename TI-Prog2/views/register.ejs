@@ -21,21 +21,21 @@
                 <form action="/users/register" method="POST" class="form-login-register">
                     <div class="formulario">
                         <label for="email" style="font-size: 18px;">Correo electrónico:</label>
-                        <input type="email" class="form-login" id="email" name="email" value="<%= old.email || '' %>" required>
+                        <input type="email" class="form-login" id="email" name="email" value="<%= old.email || '' %>" >
                         <% if (errors && errors.email) { %>
                             <p class="error"><%= errors.email.msg %></p>
                         <% } %>
                     </div>
                     <div class="formulario">
                         <label for="nombre" style="font-size: 18px;">Usuario:</label>
-                        <input type="text" class="form-login" id="nombre" name="nombre" value="<%= old.nombre || '' %>" required>
+                        <input type="text" class="form-login" id="nombre" name="nombre" value="<%= old.nombre || '' %>" >
                         <% if (errors && errors.nombre) { %>
                             <p class="error"><%= errors.nombre.msg %></p>
                         <% } %>
                     </div>
                     <div class="formulario">
                         <label for="contrasenia" style="font-size: 18px;">Contraseña:</label>
-                        <input type="password" class="form-login" id="contrasenia" name="contrasenia" required>
+                        <input type="password" class="form-login" id="contrasenia" name="contrasenia" >
                         <% if (errors && errors.contrasenia) { %>
                             <p class="error"><%= errors.contrasenia.msg %></p>
                         <% } %>

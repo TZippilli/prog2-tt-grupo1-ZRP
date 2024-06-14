@@ -40,20 +40,21 @@ const usersController = {
                 nombre: form.nombre,
                 email: form.email,
                 contrasenia: bcrypt.hashSync(form.contrasenia, 10),
-                fecha: form.fecha,
+                fechaNacimiento: form.fechaNacimiento,
                 numeroDocumento: form.numeroDocumento,
                 foto: form.foto,
             };
-    
             db.User.create(userPrueba)
                 .then((result) => {
+                    req.session.user = result;
                     return res.redirect ("/") 
                 }).catch((err) => {
                     return console.log(err);
                 });
         
         } else {
-            return res.render ("register", {errors: error.mapped, old: req.body});
+            return res.send(errors.mapped())
+            return res.render ("register", {errors: errors.mapped, old: req.body});
         }
     },
     
@@ -66,12 +67,12 @@ const usersController = {
     },
 
     register: function (req, res, next) {
-       //return res.redirect ("/")
         if (req.session.user != undefined) {
             return res.redirect("/");
         } else {
             return res.render("register", {
-                titulo: Register
+                old: {},
+                errors: {}
             });
         }
     },        
@@ -88,11 +89,3 @@ module.exports = usersController;
 
 
 
-/*
-if (results != null){
-    req.session.user = results;
-    return res.redirect("/");
-} else {
-    return res.send ("No se ecuentra el mail: " + form.email)
-}
-*/

@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
         contrasenia: {
             type : DataTypes.STRING
         },
-        fecha: {
+        fechaNacimiento: {
             type : DataTypes.DATE 
         },
         numeroDocumento: {
