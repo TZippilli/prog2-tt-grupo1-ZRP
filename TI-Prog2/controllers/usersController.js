@@ -43,7 +43,6 @@ const usersController = {
                 fecha: form.fecha,
                 numeroDocumento: form.numeroDocumento,
                 foto: form.foto,
-                createdAt: new Date()
             };
     
             db.User.create(user)
