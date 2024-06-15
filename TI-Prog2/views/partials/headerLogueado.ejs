@@ -10,12 +10,12 @@
 			</div>
 
 			<div class="col-7 col-md-6">
-				<form action="/search-results" method="GET" class="search-form">
-					<input type="text" name="search" placeholder="Buscar productos, marcas y más"
-						class="search-form_input">
-					<button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
-				</form>
-			</div>
+                <form action="/search-results" method="GET" class="search-form">
+                    <input type="text" name="search" placeholder="Buscar productos, marcas y más"
+                        class="search-form_input">
+                    <button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
+                </form>
+            </div>
 
 			<div class="col-12 col-md-4">
 				<a class="main-header_credit-link">
@@ -36,12 +36,12 @@
 			</ul>
 
 			<ul class="right-navbar">
-				<li><a href="/profile">
-						<%= db.users[0].nombre %> <i class="fas fa-user"></i>
+				<li>
+					<a href="/users/profile/id/<%=locals.user.id %>"><i class="fas fa-user"><%=locals.user.nombre %></i>
 					</a>
 				</li>
 				<li>
-					<form action="/" method="GET">
+					<form action="/users/logout" method="GET">
 						<button class="logout" type="submit">
 							Cerrar sesión <i class="fas fa-sign-in-alt"></i>
 						</button>
