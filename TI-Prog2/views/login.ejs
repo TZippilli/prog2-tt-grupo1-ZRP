@@ -21,12 +21,18 @@
                     <div class="col-12">
                         <form action="/users/login" method="GET">
                             <div class="formulario">
-                                <label for="usuario">Usuario:</label>
-                                <input type="text" class="form-login" id="usuario" name="nombre" required>
+                                <label for="nombre">Usuario (email):</label>
+                                <input type="text" class="form-login" id="nombre" name="email" required>
+                                <% if (locals.errors && errors.email) { %>
+									<p class="error"><%= errors.email.msg %></p>
+								<% } %>
                             </div>
                             <div class="formulario">
                                 <label for="contrasena">Contraseña:</label>
                                 <input type="password" class="form-login" id="contrasena" name="contrasenia" required>
+                                <% if (locals.errors && errors.contrasenia) { %>
+									<p class="error"><%= errors.contrasenia.msg %></p>
+								<% } %>
                             </div>
                             <div class="formulario form-check">
                                 <input type="checkbox" class="form-checkbox" id="recordarme" name="recordarme">

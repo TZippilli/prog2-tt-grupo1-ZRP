@@ -3,6 +3,17 @@ const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
 
 const usersController = {
+    loginGet: function (req, res) {
+        if (req.session.user){
+          res.redirect('/')
+        }
+        else {
+          res.render('login', {error:null})
+        }
+      },
+      
+    
+    
     login: function (req, res, next) {
         res.render('login');
 

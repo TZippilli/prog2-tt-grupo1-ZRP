@@ -1,3 +1,4 @@
+const { Association } = require('sequelize');
 const db = require('../database/models');
 
 const productController = {
@@ -27,8 +28,8 @@ const productController = {
         let id = req.params.id
         let filtro = {
             include: [
-                //agregar asociacion
-            ]
+                {association: "productoUsuario"}
+              ]
         }
         db.Producto.findByPk (id, filtro)
         .then (function (result) {
@@ -44,7 +45,9 @@ const productController = {
 
         if (!errors.isEmpty()) {
             let filtradoEdit = {
-                //agregar asociacion
+                include: [
+                  {association: "productoUsuario"}
+                ]
             };
 
             db.Producto.findByPk(req.params.id, filtradoEdit)
@@ -81,8 +84,21 @@ const productController = {
 
     detalle: function (req, res) {
         let idProduct = req.params.id;
+
+        const filtro = {
+            include: [{
+                association: 'productoComentario', 
+                include: [{ association: 'comentarioUsuario' }]
+            }, {
+                association: 'productoUsuario'
+            }],
+            order: [
+                ["productoComentario", "createdAt", "DESC"]
+            ]
+        };
+
     
-        db.Producto.findByPk(idProduct)
+        db.Producto.findByPk(idProduct, filtro)
           .then((result) => {
             return res.render("product", { productos: result });
           }).catch((err) => {
@@ -96,13 +112,24 @@ const productController = {
         let idProduct = req.params.id;
     
         db.Producto.findByPk(idProduct)
-          .then((result) => {
-            return res.render("product-edit", { productos: result })
-          }).catch((err) => {
-            return console.log(err);
-          });
-    
-      },
+        .then((resultados) => {
+            let condition = false;
+            if (req.session.user  != undefined && req.session.user.idUsuario == resultados.id) {
+                condition = true;
+            }
+            return res.render("product-detalle", { 
+                productFind: resultados,
+                condition: condition,
+                productoUsuario: resultados.productoUsuario,
+                comentarioUsuario: resultados.comentarioUsuario,
+                productoComentario: resultados.productoComentario
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+            return res.status(500).send("Error al cargar el detalle del producto");
+        });
+},
     
     create: function (req, res) {
         db.Usuario.findOne()
