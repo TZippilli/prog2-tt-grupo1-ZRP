@@ -29,14 +29,17 @@ const indexController = {
 
 
     db.Producto.findAll(filtrado)
-        .then((result) => {
-          return res.render("search-results", { productos: result })
-        }).catch((err) => {
-          return console.log(err);
-        });
-
-
-    }
-  }
+    .then((result) => {
+      if (result.length === 0 || !search) {
+        return res.render('search-results', { productos: [], error: "No hay resultados para su criterio de búsqueda", search: search });
+      } else { 
+        return res.render('search-results', { productos: result, error: null, search: search });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.send("Error al buscar productos");
+    });
+}}
 
 module.exports = indexController;
