@@ -53,7 +53,6 @@ const usersController = {
                 });
         
         } else {
-            
             return res.render ("register", {errors: errors.mapped, old: req.body});
         }
     },

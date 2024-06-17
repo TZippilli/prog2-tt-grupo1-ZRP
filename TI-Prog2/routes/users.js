@@ -4,7 +4,7 @@ const usersController = require('../controllers/usersController');
 const {body} = require("express-validator")
 
 
-const validations = [
+const validationsRegister = [
     body('email').isEmail().withMessage('Debes ingresar un correo electrónico válido.').bail()
     .notEmpty().withMessage('Debes compeltar este campo con tu email'),
 
@@ -13,9 +13,12 @@ const validations = [
 ];
 
 router.get("/register", usersController.register);
-router.post("/register",validations, usersController.store);
+router.post("/register",validationsRegister, usersController.store);
 router.get("/login", usersController.login);
-router.post("/login",validations, usersController.login);
+router.post("/login",validationsRegister, usersController.login);
+//cambiar validationsRegister por login//
+router.post("/logout", usersController.logout);
+
 
   
 
