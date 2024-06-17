@@ -25,12 +25,58 @@ const productController = {
 
     editProd: function (req, res) {
         let id = req.params.id
-        db.Producto.findByPk (id)
+        let filtro = {
+            include: [
+                //agregar asociacion
+            ]
+        }
+        db.Producto.findByPk (id, filtro)
         .then (function (result) {
             return res.render ("product-edit", {productos: result})
         }) .catch(function (err) {
             console.log (err)
         })
+    },
+
+    editProdForm: function(req, res) {
+        let form = req.body;
+        let errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            let filtradoEdit = {
+                //agregar asociacion
+            };
+
+            db.Producto.findByPk(req.params.id, filtradoEdit)
+                .then((resultados) => {
+                    return res.render('product-edit', {
+                        errors: errors.array(),
+                        old: req.body,
+                        productFind: resultados
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                    return res.status(500).send('Error');
+                });
+        } else {
+            let filtroSession= {
+                where: { id: req.params.id }
+            };
+
+            if (req.session.usuario) {
+                db.Producto.update(form, filtroSession)
+                    .then(() => {
+                        return res.redirect("/product/id/" + req.params.id);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        return res.status(500).send('Error');
+                    });
+            } else {
+                return res.redirect("/users/profile/id/" + req.params.id);
+            }
+        }
     },
 
     detalle: function (req, res) {

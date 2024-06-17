@@ -24,16 +24,26 @@
 							<div class="formulario">
 								<label for="nombre" style="font-size: 18px;">Nombre del Producto:</label>
 								<input type="text" class="form-login" id="nombre" name="nombreProduct" required>
+								<% if (locals.errors && errors.nombreProduct) { %>
+									<p class="error"><%= errors.nombreProduct.msg %></p>
+								<% } %>
 							</div>
 							<div class="formulario">
 								<label for="imagen" style="font-size: 18px;">Imagen:</label>
 								<input type="text" class="form-login" id="imagen" name="imagenProduct" accept="image/*"
 									required>
+									<% if (locals.errors && errors.imagenProduct) { %>
+										<p class="error"><%= errors.imagenProduct.msg %></p>
+									<% } %>
 							</div>
 							<div class="formulario">
 								<label for="descripcion" style="font-size: 18px;">Descripción:</label>
 								<textarea class="form-login" id="descripcion" name="descripcionProduct" rows="4"
 									required></textarea>
+									<% if (locals.errors && errors.descripcionProduct) { %>
+										<p class="error"><%= errors.descripcionProduct.msg %></p>
+									<% } %>
+									
 							</div>
 							<button type="submit" class="button-form">Enviar</button>
 						</form>

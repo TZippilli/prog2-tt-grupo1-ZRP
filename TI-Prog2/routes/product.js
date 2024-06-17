@@ -8,5 +8,8 @@ const productController = require("../controllers/productController");
 router.get("/:id", productController.index);
 
 router.get("/edit/:id", productController.editProd);
+router.get("/add", productController.create);
+
+
 
 module.exports = router;
