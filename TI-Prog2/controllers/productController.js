@@ -1,5 +1,6 @@
 const { Association } = require('sequelize');
 const db = require('../database/models');
+const { validationResult } = require('express-validator');
 
 const productController = {
     index: function (req, res, next) {
@@ -67,7 +68,7 @@ const productController = {
                 where: { id: req.params.id }
             };
 
-            if (req.session.usuario) {
+            if (req.session.user) {
                 db.Producto.update(form, filtroSession)
                     .then(() => {
                         return res.redirect("/product/id/" + req.params.id);
@@ -104,12 +105,8 @@ const productController = {
           }).catch((err) => {
             return console.log(err);
           });
-      },
-      showFormCreate: function (req, res) {
-        return res.render("product-edit");
-      },
-      showFormUpdate: function (req, res) {
-        let idProduct = req.params.id;
+      
+      
     
         db.Producto.findByPk(idProduct)
         .then((resultados) => {
@@ -155,13 +152,19 @@ const productController = {
     
     store: function (req, res) {
         let form = req.body;
+        let errors = validationResult(req);
     
-        db.Producto.create(form)
-          .then((result) => {
-            return res.redirect("/product")
-          }).catch((err) => {
-            return console.log(err);
-          });
+        if (errors.isEmpty()) {
+            db.Producto.create(form)
+                .then((results) => {
+                    return res.redirect("/product");
+                })
+                .catch((err) => {
+                    return console.log(err);
+                });
+        } else {
+            return res.render('product-add', { errors: errors.mapped(), old: req.body });
+        }
     
       },
 

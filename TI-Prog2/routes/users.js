@@ -12,7 +12,7 @@ const validationsRegister = [
     body('contrasenia').isLength({ min: 4 }).withMessage('La contraseña debe tener al menos 4 caracteres.')
 ];
 
-let validationsLogin = [
+const validationsLogin = [
     body("email")
     .notEmpty().withMessage("Debes completar este campo con tu email").bail()
     .isEmail().withMessage("verifica que este email sea valido").bail()
