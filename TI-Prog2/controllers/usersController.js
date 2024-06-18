@@ -73,8 +73,24 @@ const usersController = {
     },
 
     profile: function (req, res, next) {
-        res.render("profile", { db: db });
-    },
+        let idUser =req.params.clienteId;
+        const filtro = {
+          include: [
+            {association: 'usuarioProducto'}, 
+            {association:'usuarioComentario'}],
+          
+      }
+      db.Usuario.findByPk(idUser, filtro)
+      .then((results) => {
+        let condition = false;
+        if (req.session.user != undefined && req.session.usuario.clienteId == results.clienteId){
+          condition = true;
+        }
+        return res.render("profile", {perfil: results, condition: condition, usuarioProducto: results.usuarioProducto, usuarioComentario: results.usuarioComentario});
+      }).catch((err) => {
+          return console.log(err);
+      });   
+      },
 
     register: function (req, res, next) {
         if (req.session.user != undefined) {
