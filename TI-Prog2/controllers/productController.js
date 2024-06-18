@@ -106,7 +106,7 @@ const productController = {
           });
         },
     create: function (req, res) {
-        db.Usuario.findOne()
+        db.User.findOne()
     
         if (req.session.user != undefined) {
           id = req.session.user.id;
@@ -118,7 +118,7 @@ const productController = {
           return res.redirect("/users/login");
         }
     
-        db.Usuario.findByPk(id)
+        db.User.findByPk(id)
           .then(function (results) {
             return res.render('product-add', { title: "Add Product", usuario: results });
           })
