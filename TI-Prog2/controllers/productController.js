@@ -84,7 +84,7 @@ const productController = {
     },
 
     detalle: function (req, res) {
-        let idProduct = req.params.id;
+        let idProduct = req.params.idProduct;
 
         const filtro = {
             include: [{
@@ -96,38 +96,15 @@ const productController = {
             order: [
                 ["productoComentario", "createdAt", "DESC"]
             ]
-        };
+        }
 
-    
         db.Producto.findByPk(idProduct, filtro)
           .then((result) => {
-            return res.render("product", { productos: result });
+            return res.render("product", { productFind: result });
           }).catch((err) => {
             return console.log(err);
           });
-      
-      
-    
-        db.Producto.findByPk(idProduct)
-        .then((resultados) => {
-            let condition = false;
-            if (req.session.user  != undefined && req.session.user.idUsuario == resultados.id) {
-                condition = true;
-            }
-            return res.render("product-detalle", { 
-                productFind: resultados,
-                condition: condition,
-                productoUsuario: resultados.productoUsuario,
-                comentarioUsuario: resultados.comentarioUsuario,
-                productoComentario: resultados.productoComentario
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-            return res.status(500).send("Error al cargar el detalle del producto");
-        });
-},
-    
+        },
     create: function (req, res) {
         db.Usuario.findOne()
     

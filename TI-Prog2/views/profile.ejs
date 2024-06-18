@@ -54,16 +54,16 @@
 							<section class="product-box">
 								<a href="/product">
 									<figure class="product-box_image">
-										<img src="images/products/<%= producto.imagen %>" alt="<%= producto.nombre %>">
+										<img src="images/products/<%= productFind.imagen %>" alt="<%= productFind.nombre %>">
 									</figure>
 									<article class="product-box_data">
 										<h2>
-											<%= producto.nombre %>
+											<%= productFind.nombre %>
 										</h2>
 										<p>
-											<%= producto.descripcion %>
+											<%= productFind.descripcion %>
 										</p>
-										<p>Comentarios: <%= producto.comentarios.length %>
+										<p>Comentarios: <%= productFind.comentarios.length %>
 										</p>
 									</article>
 								</a>
