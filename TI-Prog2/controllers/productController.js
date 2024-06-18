@@ -95,8 +95,8 @@ const productController = {
             }],
             order: [
                 ["productoComentario", "createdAt", "DESC"]
-            ]
-        }
+        ]
+}
 
         db.Producto.findByPk(idProduct, filtro)
           .then((result) => {
@@ -176,11 +176,11 @@ const productController = {
           }).catch((err) => {
             return console.log(err);
           });
-    
-      }
-    
+   
     }
     
+  }
 
 
+  
 module.exports = productController;
