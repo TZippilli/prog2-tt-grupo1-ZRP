@@ -9,10 +9,10 @@ const indexController = {
     let filtro = {
       order: [['createdAt', 'DESC']],
       include: [
-          { association: "productoUsuario" },
-          { association: "productoComentario" }
-      ]
-        }
+          { association: "comentarios" },
+          { association: "usuario" }
+        ]
+      }
     db.Producto.findAll(filtro)
       .then(function (resultados) {
         return res.render("index", { productos: resultados });
@@ -35,9 +35,9 @@ const indexController = {
       },
       order: [["createdAt", "DESC"]],
             include: [
-                { association: "productoUsuario" },
-                { association: "productoComentario" }
-            ]
+                { association: "comentarios" },
+                { association: "usuario"}
+            ]
     }
 
 

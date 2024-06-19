@@ -45,12 +45,12 @@ module.exports = function(sequelize, DataTypes) {
 
     User.associate = function (models) {
         User.hasMany(models.Producto, {
-            as: "usuarioProducto", 
+            as: "productos", 
             foreignKey: "clienteId"
         });
 
         User.hasMany(models.Comentario, {
-            as: "usuarioComentario",
+            as: "comentarios",
             foreignKey: "clienteId"
         });
     };

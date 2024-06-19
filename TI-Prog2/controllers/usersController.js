@@ -76,8 +76,8 @@ const usersController = {
         let idUser =req.params.clienteId;
         const filtro = {
           include: [
-            {association: 'usuarioProducto'}, 
-            {association:'usuarioComentario'}],
+            {association: 'productos'}, 
+            {association:'comentarios'}],
           
       }
       db.Usuario.findByPk(idUser, filtro)

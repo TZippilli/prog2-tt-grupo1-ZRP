@@ -33,20 +33,17 @@
 										</article>
 										<div class="col-12 col-lg-4">
 											<section class="comments">
-												<% comentarios.forEach(function(comentario) { %>
+												<% for(let i = 0; i < comentarios.length; i++) { %>
 													<article>
+														<img src=<%= comentarios[i].usuario.foto %> alt="">
 														<div class="data">
-															<img src="/images/users/<%= producto.comentario %>" alt="Foto de perfil"
-																class="user-avatar">
 															<p class="user">
-																<strong> <a href="/profile">
-																		<%= %>:
-																	</a> </strong>
-																<%= %>
+																<strong> <a href="/users/profile/id/<%= comentarios[i].usuario.id %>"><%= comentarios[i].usuario.usuario %></a> </strong>
+																<%= comentarios[i].comentario %>
 															</p>
 														</div>
 													</article>
-													<% }); %>
+												<% } %>				
 											</section>
 
 											<form class="form">

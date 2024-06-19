@@ -40,14 +40,14 @@ module.exports = function(sequelize, DataTypes) {
     // revisar asociaciones
     Producto.associate = function(models) {
         Producto.belongsTo(models.User, {
-            as: "productoUsuario", 
+            as: "usuario", 
             foreignKey: "clienteId"
         });
 
         Producto.hasMany(models.Comentario, {
-            as: "productoComentario",
+            as: "comentarios",
             foreignKey: "productId"
-        });
-    };
+        });
+    };
     return Producto;
 };

@@ -49,19 +49,19 @@ CREATE TABLE comentarios (
     );
 
 insert into users (id, email, nombre, contrasenia, fechaNacimiento, numeroDocumento, foto)
-values (default, 'juanperez@gmail.com', 'juanperez', 'juanito10', '1990/05/25', 87654321, 'juanito.png' );
+values (default, 'juanperez@gmail.com', 'juanperez', 'juanito10', '1990/05/25', 87654321, 'angel.avif' );
 
 insert into users (id, email, nombre, contrasenia, fechaNacimiento, numeroDocumento, foto)
-values (default, 'mariagomez@gmail.com', 'mariagomez', 'maria123', '1985/12/12', 98765432, 'maria.png');
+values (default, 'mariagomez@gmail.com', 'mariagomez', 'maria123', '1985/12/12', 98765432, 'juanita.jpeg');
 
 insert into users (id, email, nombre, contrasenia, fechaNacimiento, numeroDocumento, foto)
-values (default, 'pedroaguilar@gmail.com', 'pedroaguilar', 'pedrito123', '1978/08/18', 76543210, 'pedro.png');
+values (default, 'pedroaguilar@gmail.com', 'pedroaguilar', 'pedrito123', '1978/08/18', 76543210, 'rob.png');
 
 insert into users (id, email, nombre, contrasenia, fechaNacimiento, numeroDocumento, foto)
-values (default, 'lauratorres@gmail.com', 'lauratorres', 'laura456', '1982/04/30', 65432109, 'laura.png');
+values (default, 'lauratorres@gmail.com', 'lauratorres', 'laura456', '1982/04/30', 65432109, 'julieta.avif');
 
 insert into users (id, email, nombre, contrasenia, fechaNacimiento, numeroDocumento, foto)
-values (default, 'carlosrojas@gmail.com', 'carlosrojas', 'carlos789', '1975/11/08', 54321098, 'carlos.png');
+values (default, 'carlosrojas@gmail.com', 'carlosrojas', 'carsyslos789', '1975/11/08', 54321098, 'mike.jpeg');
 
 
 insert into products (id, clienteId, nombreProduct, imagenProduct, descripcionProduct)
@@ -99,88 +99,92 @@ insert into comentarios (id, productId, clienteId, comentario)
 values (default, 1, 1, "Buen chasis");
 
 insert into comentarios (id, productId, clienteId, comentario)
+values (default, 1, 1, "Buen auto, me encanta el color que tiene");
+
+
+insert into comentarios (id, productId, clienteId, comentario)
 values (default, 1, 3, "¿Hacen descuentos a gente nacida en Italia?");
 
 insert into comentarios (id, productId, clienteId, comentario)
 values (default, 1, 2, "¿Se le pone aparte el aleron?");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 2, 1, "comentario 1");
+values (default, 2, 1, "Velocidad maxima?");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 2, 5, "Comentario 2");
+values (default, 2, 5, "A cuanto anda?");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 2, 4, "Comentario 3");
+values (default, 2, 4, "Muy lindo");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 3, 1, "Hermoso");
+values (default, 3, 1, "Expectacular");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 3, 3, "Buen chasis");
+values (default, 3, 3, "Buenas llantas");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 3, 5, "Buen chasis");
+values (default, 3, 5, "Hermoso");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 4, 1, "Buena nave");
+values (default, 4, 1, "Nafta o gas?");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 4, 3, "Como debe andar ese auto");
+values (default, 4, 3, "A cuanto llega");
 
 insert into comentarios (id, productId, clienteId, comentario)
 values (default, 4, 5, "Permutas?");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 5, 1, "Lindo carro");
+values (default, 5, 1, "Lindo auto");
 
 insert into comentarios (id, productId, clienteId, comentario)
 values (default, 5, 4, "Como debe andar ese auto");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 5, 2, "Cambias por gol 2010?");
+values (default, 5, 2, "Si no pone el precio por algo sera");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 6, 1, "Lindo carro");
+values (default, 6, 1, "Precio?");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 6, 5, "Como debe andar ese auto");
+values (default, 6, 5, "Tiene 4 puertas?");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 6, 3, "Cambias por gol 2010?");
+values (default, 6, 3, "O como o compro ese auto");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 7, 1, "Lindo carro");
+values (default, 7, 1, "Avion");
 
 insert into comentarios (id, productId, clienteId, comentario)
 values (default, 7, 4, "Como debe andar ese auto");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 7, 2, "Cambias por gol 2010?");
+values (default, 7, 2, "Autazo");
 
 insert into comentarios (id, productId, clienteId, comentario)
 values (default, 8, 1, "Lindo carro");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 8, 2, "Como debe andar ese auto");
+values (default, 8, 2, "Vuela es maquina");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 8, 4, "Cambias por gol 2010?");
+values (default, 8, 4, "Aceptas permutas");
 
 insert into comentarios (id, productId, clienteId, comentario)
 values (default, 9, 5, "Lindo carro");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 9, 2, "Como debe andar ese auto");
+values (default, 9, 2, "Terrible");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 9, 4, "Cambias por gol 2010?");
+values (default, 9, 4, "Tiene motor?");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 10, 1, "Lindo carro");
+values (default, 10, 1, "Tenes otro color?");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 10, 3, "Como debe andar ese auto");
+values (default, 10, 3, "Que lindo manejar uno de esos");
 
 insert into comentarios (id, productId, clienteId, comentario)
-values (default, 10, 5, "Cambias por gol 2010?");
+values (default, 10, 5, "Algun dia me voy a dar el gustito");
