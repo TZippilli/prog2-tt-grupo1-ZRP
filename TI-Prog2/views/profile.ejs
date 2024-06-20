@@ -5,7 +5,7 @@
 
 <body>
     <!-- Header -->
-    <% if (locals.user != undefined) { %>
+    <% if (user != undefined) { %>
         <%- include('./partials/headerLogueado') %>
     <% } else { %>
         <%- include('./partials/header') %>
@@ -15,7 +15,7 @@
     <section class="info-usuario container products-wrapper">
         <div class="row">
             <div class="img-container offset-3 col-2">
-                <img src="/images/users/<%= users.foto %>" alt="foto de perfil" class="foto-perfil">
+                <img src="/images/users/<%= productos[i].usuario.foto %>" alt="">
             </div>
             <div class="data-container col-6">
                 <div class="d-flex align-items-center ">
@@ -30,7 +30,7 @@
                 <div>
                     <ul class="">
                         <li><%= user.email %></li>
-                        <li>8 productos</li>
+                        <li><%= productos.length %> productos</li>
                         <li>200 seguidores</li>
                         <li>300 comentarios</li>
                     </ul>
@@ -52,11 +52,11 @@
                     <section class="product-box">
                         <a href="/products/<%= productos[i].id %>">
                             <figure class="product-box_image">
-                                <img src="/images/products/<%= productos[i].foto %>" alt="foto de <%= productos[i].nombre %>">
+                                <img src= <%= productos[i].imagenProduct %> alt="foto de <%= productos[i].nombreProduct %>">
                             </figure>
                             <article class="product-box_data">
-                                <h2><%= productos[i].nombre %></h2>
-                                <p><%= productos[i].descripcion %></p>
+                                <h2><%= productos[i].nombreProduct %></h2>
+                                <p><%= productos[i].descripcionProduct %></p>
                                 <p>comentarios: </p>
                             </article>
                         </a>

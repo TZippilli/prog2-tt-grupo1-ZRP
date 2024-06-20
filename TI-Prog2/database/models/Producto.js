@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING
         },
         descripcionProduct: {
-            type: DataTypes.STRING 
+            type: DataTypes.STRING
         },
         createdAt: {
             type: DataTypes.STRING
@@ -34,13 +34,12 @@ module.exports = function(sequelize, DataTypes) {
         timestamps: false,
         underscored: false
     };
-    
+
     let Producto = sequelize.define(alias, cols, config);
-    
-    // revisar asociaciones
+
     Producto.associate = function(models) {
         Producto.belongsTo(models.User, {
-            as: "usuario", 
+            as: "usuario",
             foreignKey: "clienteId"
         });
 
@@ -49,5 +48,6 @@ module.exports = function(sequelize, DataTypes) {
             foreignKey: "productId"
         });
     };
+
     return Producto;
 };

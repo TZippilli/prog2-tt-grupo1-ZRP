@@ -2,36 +2,36 @@ module.exports = function(sequelize, DataTypes) {
     let alias = "User";
     let cols = {
         id: {
-            autoIncrement : true,
-            primaryKey : true,
-            type : DataTypes.INTEGER
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER
         },
         email: {
-            type : DataTypes.STRING
+            type: DataTypes.STRING
         },
         nombre: {
-            type : DataTypes.STRING
+            type: DataTypes.STRING
         },
         contrasenia: {
-            type : DataTypes.STRING
+            type: DataTypes.STRING
         },
         fechaNacimiento: {
-            type : DataTypes.DATE 
+            type: DataTypes.DATE
         },
         numeroDocumento: {
-            type : DataTypes.INTEGER
+            type: DataTypes.INTEGER
         },
         foto: {
-            type : DataTypes.STRING
+            type: DataTypes.STRING
         },
         createdAt: {
-            type : DataTypes.STRING
+            type: DataTypes.STRING
         },
         updatedAt: {
-            type : DataTypes.STRING
+            type: DataTypes.STRING
         },
         deletedAt: {
-            type : DataTypes.STRING
+            type: DataTypes.STRING
         }
     };
 
@@ -40,12 +40,12 @@ module.exports = function(sequelize, DataTypes) {
         timestamps: false,
         underscored: false
     };
-    
+
     let User = sequelize.define(alias, cols, config);
 
-    User.associate = function (models) {
+    User.associate = function(models) {
         User.hasMany(models.Producto, {
-            as: "productos", 
+            as: "productos",
             foreignKey: "clienteId"
         });
 
@@ -54,7 +54,6 @@ module.exports = function(sequelize, DataTypes) {
             foreignKey: "clienteId"
         });
     };
-
 
     return User;
 };

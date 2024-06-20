@@ -112,6 +112,9 @@ const usersController = {
                 res.status(500).send('Error en el servidor');
             });
     },
+    
+    
+    
 
 
     logout: function (req, res) {
