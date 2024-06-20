@@ -113,15 +113,15 @@ const usersController = {
     
             db.User.update({
                 email: form.email,
-                usuario: form.usuario,
+                usuario: form.nombre,
                 contrasenia: hashedPassword,
-                fecha_nacimiento: form.fecha_nacimiento,
-                nro_documento: form.nro_documento,
-                foto_perfil: form.foto_perfil
+                fecha_nacimiento: form.fechaNacimiento,
+                nro_documento: form.numeroDocumento,
+                foto_perfil: form.foto
             }, {
                 where: { id: req.session.user.id }
             }).then(() => {
-                res.redirect("/users/profile");
+                res.redirect("/users/profile/"+ user.id);
             }).catch((err) => {
                 console.log(err);
                 res.status(500).send('Error en el servidor');
@@ -150,11 +150,11 @@ const usersController = {
     
         db.User.findByPk(idUsuario, relaciones)
             .then(function (result) {
-    
                 let condition = false;
     
                 if (req.session.user != undefined && req.session.user.id == result.idUsuario) {
                     condition = true;
+                    console.log("hola")
                 }
     
                return res.render('profile', { user: result, condition: condition });

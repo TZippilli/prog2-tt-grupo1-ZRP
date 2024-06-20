@@ -21,11 +21,9 @@
                 <div class="d-flex align-items-center ">
                     <h1 class="main-title">
                         <%= user.nombre %>
-                        <% if (condition) { %>
-                            <a href="/users/edit">
+                            <a href="/users/edit/<%= user.id %>">
                             <i class="fas fa-cog"></i>
                             </a>
-                        <% } %>
                     </h1>
                     <a class="btn mt-3 ml-4" href="">SEGUIR</a>
                 </div>

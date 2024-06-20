@@ -22,7 +22,7 @@ router.get("/edit/:id", productController.editProd);
 router.get("/add/:id", productController.create);
 
 router.get('/:id', productController.detalle); 
-router.get('/edit/:id', productController.editProd)
+
 router.get('/destroy', productController.destroy);
 
 
@@ -30,7 +30,6 @@ router.post("/")
 router.post('/add', productController.store)
 router.post('/edit/:id', validationsEditAdd, productController.editProdForm);
 router.post('/destroy', productController.destroy);
-router.get('/productAdd', productController.productoAdd)
 
 
 module.exports = router;
