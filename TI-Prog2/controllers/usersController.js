@@ -100,12 +100,16 @@ const usersController = {
     profile: function (req, res) {
         let idUsuario = req.params.id;
         let relaciones = { include: [{ association: 'productos' }, { association: 'comentarios' }] };
-
+    
         db.User.findByPk(idUsuario, relaciones)
             .then(function (result) {
-             res.render('profile', {
-                user: true, users: result
-             })
+                if (result) {
+                    res.render('profile', {
+                        user: result,
+                    });
+                } else {
+                    res.status(404).send('Usuario no encontrado');
+                }
             })
             .catch(function (err) {
                 console.log(err);
