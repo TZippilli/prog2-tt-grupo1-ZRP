@@ -24,8 +24,8 @@ const validationsLogin = [
 
 router.get("/register", usersController.register);
 router.post("/register",validationsRegister, usersController.store);
-router.get("/login", usersController.loginGet);
-router.post("/login",validationsLogin, usersController.login);
+router.get("/login", usersController.loginGet); //login
+router.post("/login",validationsLogin, usersController.login); //checkuser
 router.post("/logout", usersController.logout);
 
 

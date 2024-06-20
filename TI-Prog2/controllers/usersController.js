@@ -3,44 +3,69 @@ const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
 
 const usersController = {
-    loginGet: function (req, res) {
-        if (req.session.user){
-          res.redirect('/')
-        }
-        else {
-          res.render('login', {error:null})
-        }
-      },
-      
     
+    loginGet: function(req,res){
+        if(req.session.user != undefined){
+            res.redirect('/')
+        } else{
+            res.render('login', {error:null})
+        }
+    },
+
+    login: function(req, res){
+        let {email, contrasenia, rememberMe} = req.body
     
-    login: function (req, res, next) {
-        res.render('login');
-
-        const filtro = {
-            where: { email: req.body.email }
-        };
-
-        db.User.findOne(filtro)
-            .then((result) => {
-                if (result) {
-                    if (bcrypt.compareSync(req.body.password, result.contrasenia)) {
-                        req.session.user = result;
-
-                        if (req.body.recordarme) {
-                            res.cookie("userId", result.id, { maxAge: 1000 * 60 * 35 });
-                        }
-
-                        return res.redirect("/product");
-                    } else {
-                        return res.send("Contraseña incorrecta");
-                    }
-                } else {
-                    return res.send("No hay usuario registrado con el email: " + req.body.email);
+        db.User.findOne({
+            where:{
+                email:email
+            },
+            raw:true
+        })
+        
+        .then(function(resultados){
+            if(resultados != null){
+            let comparacionContra = bcrypt.compareSync(contrasenia, resultados.contrasenia)
+            if(comparacionContra){
+                req.session.user  = {
+                    id: resultados.id,
+                    nombre: resultados.nombre,
+                    email:resultados.email
                 }
-            }).catch((err) => {
-                return console.log(err);
+                if(rememberMe === 'on'){
+                    res.cookie(
+                        'rememberUser', 
+                        {
+                            id: clientes.id,
+                        },
+                        {
+                            maxAge: 1000 * 60 * 15
+                        }
+                    )
+                }
+                
+                res.redirect("/") //revisar
+            }else{
+                res.redirect('/users/register')
+            }
+        }else{
+            res.redirect('/users/register')
+        }
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+    },
+
+
+    register: function (req, res, next) {
+        if (req.session.user != undefined) {
+            return res.redirect("/");
+        } else {
+            return res.render("register", {
+                old: {},
+                errors: {}
             });
+        }
     },
 
     store: (req, res) => {
@@ -90,18 +115,7 @@ const usersController = {
       }).catch((err) => {
           return console.log(err);
       });   
-      },
-
-    register: function (req, res, next) {
-        if (req.session.user != undefined) {
-            return res.redirect("/");
-        } else {
-            return res.render("register", {
-                old: {},
-                errors: {}
-            });
-        }
-    },        
+      },        
 
     logout: function (req, res) {
         req.session.destroy();

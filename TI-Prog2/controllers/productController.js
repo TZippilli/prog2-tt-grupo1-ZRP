@@ -20,7 +20,7 @@ const productController = {
     db.Producto.findByPk(id, criterio)
       .then(function (results) {
         if (!results) {
-          return res.status(404).send('Producto no encontrado');
+          return res.status(404).send('Productooo no encontrado');
         }
 
         if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
@@ -44,7 +44,7 @@ const productController = {
     db.Producto.findByPk(id, filtro)
       .then(function (result) {
         if (!result) {
-          return res.status(404).send('Producto no encontrado');
+          return res.status(404).send('Productooo no encontrado');
         }
         return res.render("product-edit", { producto: result });
       }).catch(function (err) {
@@ -67,7 +67,7 @@ const productController = {
       db.Producto.findByPk(req.params.id, filtradoEdit)
         .then((resultados) => {
           if (!resultados) {
-            return res.status(404).send('Producto no encontrado');
+            return res.status(404).send('Productooo no encontrado');
           }
           return res.render('product-edit', {
             errors: errors.array(),
@@ -117,7 +117,7 @@ const productController = {
     db.Producto.findByPk(idProduct, filtro)
       .then((result) => {
         if (!result) {
-          return res.status(404).send('Producto no encontrado');
+          return res.status(404).send('Productoo no encontrado');
         }
         return res.render("product", { productFind: result });
       }).catch((err) => {
@@ -126,36 +126,32 @@ const productController = {
       });
   },
 
-  create: function (req, res) {
-    db.User.findOne()
-      .then((user) => {
-        if (req.session.user != undefined) {
-          id = req.session.user.id;
-        }
-        else if (req.cookies.userId != undefined) {
-          id = req.cookies.userId;
-        }
-        else {
-          return res.redirect("/users/login");
-        }
-
-        db.User.findByPk(id)
-          .then(function (results) {
-            if (!results) {
-              return res.status(404).send('Usuario no encontrado');
-            }
-            return res.render('product-add', { usuario: results });
-          })
-          .catch(function (error) {
-            console.log(error);
-            return res.status(500).send('Error en el servidor');
-          });
-      })
-      .catch(function (error) {
-        console.log(error);
-        return res.status(500).send('Error en el servidor');
-      });
-  },
+  create: function(req, res){
+    let {nombre,descripcion,imagen} = req.body
+    let id = req.session.user.id
+    
+    
+    db.Producto.create({
+        clienteId:id,
+        nombreProduct,
+        imagenProduct:imagen,
+        descripcionProduct,
+        
+    })
+    .then(function(db){
+        res.redirect('/') //revisar
+    })
+    .catch(function(err){
+        console.log(err)
+    })
+},
+productoAdd: function(req,res){
+  if(req.session.cliente != undefined){
+      res.render('product-add')
+  }else{
+      res.redirect('/users/login')
+  } 
+},
 
   store: function (req, res) {
     let form = req.body;
