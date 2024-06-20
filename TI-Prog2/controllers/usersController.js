@@ -61,30 +61,26 @@ const usersController = {
         let errors = validationResult(req);
         let form = req.body;
         if (errors.isEmpty()) {
-            let hashedPassword = bcrypt.hashSync(form.contrasenia, 10);
-            db.User.create({
+            let userPrueba = {
                 nombre: form.nombre,
                 email: form.email,
-                contrasenia: hashedPassword,
+                contrasenia: bcrypt.hashSync(form.contrasenia, 10),
                 fechaNacimiento: form.fechaNacimiento,
                 numeroDocumento: form.numeroDocumento,
-                foto: form.foto_perfil,
-            }).then((result) => {
-                req.session.user = {
-                    id: result.id,
-                    nombre: result.nombre,
-                    email: result.email
-                };
-                res.redirect("/");
-            }).catch((err) => {
-                console.log(err);
-                res.redirect('/users/register');
-            });
+                foto: form.foto,
+            };
+            db.User.create(userPrueba)
+                .then((result) => {
+                    req.session.user = result;
+                    return res.redirect("/")
+                }).catch((err) => {
+                    return console.log(err);
+                });
         } else {
-            return res.render("register", { errors: errors.mapped(), old: req.body });
+            return res.render("register", { errors: errors.mapped, old: req.body });
         }
     },
-
+    
     profileEdit: function (req, res, next) {
         if (req.session.user) {
             let id = req.session.user.id;
