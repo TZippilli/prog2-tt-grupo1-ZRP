@@ -6,33 +6,38 @@ const productController = {
   index: function (req, res, next) {
     const id = req.params.id;
     let criterio = {
-      include: [
-        { association: "usuario" },
-        {
-          association: "comentarios",
-          include: [{ association: 'usuario' }]
-        }
-      ],
-      order: [[{ model: db.Comentario, as: 'comentarios' }, 'createdAt', 'DESC']]
+        include: [
+            { association: "usuario" },
+            {
+                association: "comentarios",
+                include: [{ association: 'usuario' }]
+            }
+        ],
+        order: [[{ model: db.Comentario, as: 'comentarios' }, 'createdAt', 'DESC']]
     }
     let condition = false;
 
     db.Producto.findByPk(id, criterio)
-      .then(function (results) {
-        if (!results) {
-          return res.status(404).send('Productooo no encontrado');
-        }
+        .then(function (results) {
+            if (!results) {
+                return res.status(404).send('Producto no encontrado');
+            }
 
-        if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
-          condition = true;
-        }
-        return res.render('product', { producto: results, comentarios: results.comentarios || [], condition: condition });
-      })
-      .catch(function (error) {
-        console.log(error);
-        return res.status(500).send('Error en el servidor');
-      });
-  },
+            if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
+                condition = true;
+            }
+            res.render('product', {
+                producto: results,
+                comentarios: results.comentarios || [],
+                condition: condition,
+                user: req.session.user // Asegúrate de pasar el usuario a la vista
+            });
+        })
+        .catch(function (error) {
+            console.log(error);
+            return res.status(500).send('Error en el servidor');
+        });
+},
 
   editProd: function (req, res) {
     let id = req.params.id;

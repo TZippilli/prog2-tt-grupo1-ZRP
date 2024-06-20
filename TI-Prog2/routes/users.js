@@ -30,6 +30,8 @@ router.post("/logout", usersController.logout);
 
 router.get("/profile/:id", usersController.profile)
 
+router.get('/edit', usersController.profileEdit);
+router.post('/edit', usersController.update);
   
 
 module.exports = router;

@@ -5,61 +5,49 @@ const { validationResult } = require("express-validator");
 const usersController = {
 
     loginGet: function (req, res) {
-        if (req.session.user != undefined) {
-            res.redirect('/')
+        if (req.session.user) {
+            res.redirect('/');
         } else {
-            res.render('login', { error: null })
+            res.render('login', { error: null });
         }
     },
 
     login: function (req, res) {
-        let { email, contrasenia, rememberMe } = req.body
+        let { email, contrasenia, rememberMe } = req.body;
 
         db.User.findOne({
-            where: {
-                email: email
-            },
+            where: { email: email },
             raw: true
-        })
-
-            .then(function (resultados) {
-                if (resultados != null) {
-                    let comparacionContra = bcrypt.compareSync(contrasenia, resultados.contrasenia)
-                    if (comparacionContra) {
-                        req.session.user = {
-                            id: resultados.id,
-                            nombre: resultados.nombre,
-                            email: resultados.email
-                        }
-                        if (rememberMe === 'on') {
-                            res.cookie(
-                                'rememberUser',
-                                {
-                                    id: clientes.id,
-                                },
-                                {
-                                    maxAge: 1000 * 60 * 15
-                                }
-                            )
-                        }
-
-                        res.redirect("/") //revisar
-                    } else {
-                        res.redirect('/users/register')
+        }).then(function (resultados) {
+            if (resultados !== null) {
+                let comparacionContra = bcrypt.compareSync(contrasenia, resultados.contrasenia);
+                if (comparacionContra) {
+                    req.session.user = {
+                        id: resultados.id,
+                        nombre: resultados.nombre,
+                        email: resultados.email
+                    };
+                    if (rememberMe === 'on') {
+                        res.cookie('rememberUser', resultados.id, {
+                            maxAge: 1000 * 60 * 15
+                        });
                     }
+                    res.redirect('/');
                 } else {
-                    res.redirect('/users/register')
+                    res.redirect('/users/register');
                 }
-            })
-            .catch(function (err) {
-                console.log(err)
-            })
+            } else {
+                res.redirect('/users/register');
+            }
+        }).catch(function (err) {
+            console.log(err);
+            res.redirect('/users/register');
+        });
     },
 
-
     register: function (req, res, next) {
-        if (req.session.user != undefined) {
-            return res.redirect("/");
+        if (req.session.user) {
+            return res.redirect('/');
         } else {
             return res.render("register", {
                 old: {},
@@ -68,51 +56,115 @@ const usersController = {
         }
     },
 
+
     store: (req, res) => {
         let errors = validationResult(req);
         let form = req.body;
         if (errors.isEmpty()) {
-            let userPrueba = {
+            let hashedPassword = bcrypt.hashSync(form.contrasenia, 10);
+            db.User.create({
                 nombre: form.nombre,
                 email: form.email,
-                contrasenia: bcrypt.hashSync(form.contrasenia, 10),
+                contrasenia: hashedPassword,
                 fechaNacimiento: form.fechaNacimiento,
                 numeroDocumento: form.numeroDocumento,
-                foto: form.foto,
-            };
-            db.User.create(userPrueba)
-                .then((result) => {
-                    req.session.user = result;
-                    return res.redirect("/")
-                }).catch((err) => {
-                    return console.log(err);
-                });
-
+                foto: form.foto_perfil,
+            }).then((result) => {
+                req.session.user = {
+                    id: result.id,
+                    nombre: result.nombre,
+                    email: result.email
+                };
+                res.redirect("/");
+            }).catch((err) => {
+                console.log(err);
+                res.redirect('/users/register');
+            });
         } else {
-            return res.render("register", { errors: errors.mapped, old: req.body });
+            return res.render("register", { errors: errors.mapped(), old: req.body });
         }
     },
 
     profileEdit: function (req, res, next) {
-        return res.render("profile-edit", { db: db });
+        if (req.session.user) {
+            let id = req.session.user.id;
+    
+            db.User.findByPk(id)
+                .then(function (user) {
+                    if (user) {
+                        res.render('profile-edit', { user: user });
+                    } else {
+                        res.status(404).send('Usuario no encontrado');
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    res.status(500).send('Error en el servidor');
+                });
+        } else {
+            res.redirect("/users/login");
+        }
     },
+    
+    
+    
+    update: function (req, res) {
+        let form = req.body;
+        let errors = validationResult(req);
+    
+        if (errors.isEmpty()) {
+            let hashedPassword = bcrypt.hashSync(form.contrasena, 10);
+    
+            db.User.update({
+                email: form.email,
+                usuario: form.usuario,
+                contrasenia: hashedPassword,
+                fecha_nacimiento: form.fecha_nacimiento,
+                nro_documento: form.nro_documento,
+                foto_perfil: form.foto_perfil
+            }, {
+                where: { id: req.session.user.id }
+            }).then(() => {
+                res.redirect("/users/profile");
+            }).catch((err) => {
+                console.log(err);
+                res.status(500).send('Error en el servidor');
+            });
+        } else {
+            db.User.findByPk(req.session.user.id)
+                .then(function (user) {
+                    if (user) {
+                        res.render('profile-edit', { user: user, errors: errors.mapped(), old: req.body });
+                    } else {
+                        res.status(404).send('Usuario no encontrado');
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                    res.status(500).send('Error en el servidor');
+                });
+        }
+    },
+    
 
     profile: function (req, res) {
         let idUsuario = req.params.id;
-        let relaciones = { include: [{ association: 'productos' }, { association: 'comentarios' }] };
+        let relaciones = { include: [{ association: 'productos' }, { association: 'comentarios' }], 
+        order: [[{model: db.Producto, as: 'productos'}, 'createdAt', 'DESC']] };
+        
     
         db.User.findByPk(idUsuario, relaciones)
             .then(function (result) {
-                if (result) {
-                    res.render('profile', {
-                        user: result,
-                    });
-                } else {
-                    res.status(404).send('Usuario no encontrado');
+    
+                let condition = false;
+    
+                if (req.session.user != undefined && req.session.user.id == result.idUsuario) {
+                    condition = true;
                 }
+    
+               return res.render('profile', { user: result, condition: condition });
             })
             .catch(function (err) {
-                console.log(err);
+                console.error('Error al buscar usuario:', err);
                 res.status(500).send('Error en el servidor');
             });
     },
@@ -120,16 +172,11 @@ const usersController = {
     
     
 
-
     logout: function (req, res) {
         req.session.destroy();
-        res.clearCookie("userId");
-        return res.redirect("/");
+        res.clearCookie("rememberUser");
+        res.redirect("/");
     }
 };
 
 module.exports = usersController;
-
-
-
-

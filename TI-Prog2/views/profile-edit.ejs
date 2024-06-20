@@ -1,63 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Include Head -->
-
 <%- include("./partials/head") %>
 
-	<body>
-		<!-- Header -->
-		<% if (locals.user != undefined) { %>
-			<%- include('./partials/headerLogueado') %>
-		<% } else { %>
-			<%- include('./partials/header') %>
-		<% } %>
-			<!-- /Header -->
+<body>
+    <% if (user) { %>
+        <% include('./partials/headerLogueado') %>
+    <% } else { %>
+        <% include('./partials/header') %>
+    <% } %>
 
-			<!-- Novedades -->
-			<div class="container products-wrapper">
-				<div class="row">
-					<div class="col-12">
-						<h2 class="products-title">Editar mi perfil</h2>
-					</div>
-					<!-- Show the "ultimos" products -->
-					<h2 class="col-12">
-						<form action="/profile/edit" method="GET" class="form-login-register">
-							<div class="formulario">
-								<label for="email" style="font-size: 18px;">Email:</label>
-								<input type="email" class="form-login" id="email" name="email" required>
-							</div>
-							<div class="formulario">
-								<label for="usuario" style="font-size: 18px;">Usuario:</label>
-								<input type="text" class="form-login" id="usuario" name="usuario" required>
-							</div>
-							<div class="formulario">
-								<label for="contrasena" style="font-size: 18px;">Contraseña:</label>
-								<input type="password" class="form-login" id="contrasena" name="contrasena" required>
-							</div>
-							<div class="formulario">
-								<label for="fecha_nacimiento" style="font-size: 18px;">Fecha de Nacimiento:</label>
-								<input type="date" class="form-login" id="fecha_nacimiento" name="fecha_nacimiento"
-									required>
-							</div>
-							<div class="formulario">
-								<label for="nro_documento" style="font-size: 18px;">Nro de Documento:</label>
-								<input type="number" class="form-login" id="nro_documento" name="nro_documento"
-									required>
-							</div>
-							<div class="formulario">
-								<label for="foto_perfil" style="font-size: 18px;">Foto de Perfil:</label>
-								<input type="text" class="form-login" id="foto_perfil" name="foto_perfil" required>
-							</div>
-							<button type="submit" class="button-form">Guardar Cambios</button>
-						</form>
+    <div class="container products-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="products-title">Editar mi perfil</h2>
+            </div>
+            <div class="col-12">
+                <form action="/users/profile/edit" method="POST" enctype="multipart/form-data" class="form-login-register">
+                    <div class="formulario">
+                        <label for="email" style="font-size: 18px;">Email:</label>
+                        <input type="email" class="form-login" id="email" name="email" value="<%= user.email %>" required>
+                        <% if (errors && errors.email) { %>
+                            <p class="error"><%= errors.email.msg %></p>
+                        <% } %>
+                    </div>
+                    <div class="formulario">
+                        <label for="usuario" style="font-size: 18px;">Usuario:</label>
+                        <input type="text" class="form-login" id="usuario" name="usuario" value="<%= user.usuario %>" required>
+                        <% if (errors && errors.usuario) { %>
+                            <p class="error"><%= errors.usuario.msg %></p>
+                        <% } %>
+                    </div>
+                    <div class="formulario">
+                        <label for="contrasena" style="font-size: 18px;">Contraseña:</label>
+                        <input type="password" class="form-login" id="contrasena" name="contrasena" required>
+                        <% if (errors && errors.contrasena) { %>
+                            <p class="error"><%= errors.contrasena.msg %></p>
+                        <% } %>
+                    </div>
+                    <div class="formulario">
+                        <label for="fecha_nacimiento" style="font-size: 18px;">Fecha de Nacimiento:</label>
+                        <input type="date" class="form-login" id="fecha_nacimiento" name="fecha_nacimiento" value="<%= user.fecha_nacimiento %>" required>
+                        <% if (errors && errors.fecha_nacimiento) { %>
+                            <p class="error"><%= errors.fecha_nacimiento.msg %></p>
+                        <% } %>
+                    </div>
+                    <div class="formulario">
+                        <label for="nro_documento" style="font-size: 18px;">Nro de Documento:</label>
+                        <input type="number" class="form-login" id="nro_documento" name="nro_documento" value="<%= user.nro_documento %>" required>
+                        <% if (errors && errors.nro_documento) { %>
+                            <p class="error"><%= errors.nro_documento.msg %></p>
+                        <% } %>
+                    </div>
+                    <div class="formulario">
+                        <label for="foto_perfil" style="font-size: 18px;">Foto de Perfil:</label>
+                        <input type="text" class="form-login" id="foto_perfil" name="foto_perfil" value="<%= user.foto_perfil %>" required>
+                        <% if (errors && errors.foto_perfil) { %>
+                            <p class="error"><%= errors.foto_perfil.msg %></p>
+                        <% } %>
+                    </div>
+                    <button type="submit" class="button-form">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-
-
-
-
-						<!-- footer -->
-						<%- include("./partials/footer") %>
-							<!-- /footer -->
-	</body>
+    <% include("./partials/footer") %>
+</body>
 
 </html>
