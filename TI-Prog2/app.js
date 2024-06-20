@@ -8,7 +8,7 @@ const db = require("./database/models");
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const productRouter = require('./routes/product');
-const profileRouter = require('./routes/profile');
+const profileRouter = require('./routes/users');
 const resultsRouter = require('./routes/results');
 
 const app = express();

@@ -28,6 +28,7 @@ router.get("/login", usersController.loginGet); //login
 router.post("/login",validationsLogin, usersController.login); //checkuser
 router.post("/logout", usersController.logout);
 
+router.get("/profile/:id", usersController.profile)
 
   
 
