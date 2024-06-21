@@ -16,14 +16,15 @@ const validationsEditAdd = [
 ]
 
 // agregamos el id para buscar por prod. 
+router.get("/add", productController.productAdd);
 router.get("/:id", productController.index);
 
 router.get("/edit/:id", productController.editProd);
-router.get("/add/:id", productController.create);
 
-router.get('/:id', productController.detalle); 
+router.get('/view/:id', productController.detalle); 
 
 router.get('/destroy', productController.destroy);
+
 
 
 router.post("/")

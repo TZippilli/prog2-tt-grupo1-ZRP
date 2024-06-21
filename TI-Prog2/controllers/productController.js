@@ -6,38 +6,38 @@ const productController = {
   index: function (req, res, next) {
     const id = req.params.id;
     let criterio = {
-        include: [
-            { association: "usuario" },
-            {
-                association: "comentarios",
-                include: [{ association: 'usuario' }]
-            }
-        ],
-        order: [[{ model: db.Comentario, as: 'comentarios' }, 'createdAt', 'DESC']]
+      include: [
+        { association: "usuario" },
+        {
+          association: "comentarios",
+          include: [{ association: 'usuario' }]
+        }
+      ],
+      order: [[{ model: db.Comentario, as: 'comentarios' }, 'createdAt', 'DESC']]
     }
     let condition = false;
 
     db.Producto.findByPk(id, criterio)
-        .then(function (results) {
-            if (!results) {
-                return res.status(404).send('Producto no encontrado');
-            }
+      .then(function (results) {
+        if (!results) {
+          return res.status(404).send('Producto noo index encontrado');
+        }
 
-            if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
-                condition = true;
-            }
-            res.render('product', {
-                producto: results,
-                comentarios: results.comentarios || [],
-                condition: condition,
-                user: req.session.user // Asegúrate de pasar el usuario a la vista
-            });
-        })
-        .catch(function (error) {
-            console.log(error);
-            return res.status(500).send('Error en el servidor');
+        if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
+          condition = true;
+        }
+        res.render('product', {
+          producto: results,
+          comentarios: results.comentarios || [],
+          condition: condition,
+          user: req.session.user
         });
-},
+      })
+      .catch(function (error) {
+        console.log(error);
+        return res.status(500).send('Error en el servidor');
+      });
+  },
 
   editProd: function (req, res) {
     let id = req.params.id;
@@ -105,58 +105,63 @@ const productController = {
   },
 
   detalle: function (req, res) {
-    let idProduct = req.params.idProduct;
-
-    const filtro = {
-      include: [{
-        association: 'comentarios',
-        include: [{ association: 'usuario' }]
-      }, {
-        association: 'usuario'
-      }],
-      order: [
-        ["comentarios", "createdAt", "DESC"]
-      ]
-    };
-
-    db.Producto.findByPk(idProduct, filtro)
-      .then((result) => {
-        if (!result) {
-          return res.status(404).send('Productoo no encontrado');
+    const id = req.params.id;
+    let criterio = {
+      include: [
+        { association: "usuario" },
+        {
+          association: "comentarios",
+          include: [{ association: 'usuario' }]
         }
-        return res.render("product", { productFind: result });
-      }).catch((err) => {
-        console.log(err);
+      ],
+      order: [[{ model: db.Comentario, as: 'comentarios' }, 'createdAt', 'DESC']]
+    }
+    let condition = false;
+
+    db.Producto.findByPk(id, criterio)
+      .then(function (results) {
+        if (!results) {
+          return res.status(404).send('Producto noo encontrado');
+        }
+
+        if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
+          condition = true;
+        }
+        res.render('product', {
+          producto: results,
+          comentarios: results.comentarios || [],
+          condition: condition,
+          user: req.session.user
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
         return res.status(500).send('Error en el servidor');
       });
   },
-
-  create: function(req, res){
-    let {nombre,descripcion,imagen} = req.body
+  productAdd: function (req, res) { 
+    res.render("product-add")
+   },
+  create: function (req, res) {
+    console.log("hola")
+    let { nombre, descripcion, imagen } = req.body
     let id = req.session.user.id
-    
-    
+
+
     db.Producto.create({
-        clienteId:id,
-        nombreProduct,
-        imagenProduct:imagen,
-        descripcionProduct,
-        
+      clienteId: id,
+      nombreProduct: nombre,
+      imagenProduct: imagen,
+      descripcionProduct: descripcion,
+
     })
-    .then(function(db){
-        res.redirect('/') //revisar
-    })
-    .catch(function(err){
+      .then(function (db) {
+        return res.redirect('/product/' + product.id) //revisar
+      })
+      .catch(function (err) {
         console.log(err)
-    })
-},
-productoAdd: function(req,res){
-  if(req.session.cliente != undefined){
-      res.render('product-add')
-  }else{
-      res.redirect('/users/login')
-  } 
-},
+      })
+  },
 
   store: function (req, res) {
     let form = req.body;
