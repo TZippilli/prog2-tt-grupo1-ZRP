@@ -51,9 +51,12 @@
                             <input class="form-input" type="text" value="" placeholder="Agregar comentario" id="comentario" name="comentario">
                             <button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
                         </form>
-                    <%} %>
+                    <%} else {%>
+                        <h2>Debes estar logueado para comentar</h2>
+                        <% } %>
                     <hr>
                 </div>
+                
             </div>
         </div>
     </div>
