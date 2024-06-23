@@ -22,6 +22,9 @@
                 </p>
             
             <%}%>
+            <% if(!propietario){ %>
+                <p class="user">Producto cargado por<a class="user" href="/users/profile/<%= producto.usuario.id%>"><%= producto.usuario.nombre%></a></p>
+            <%}%>
             
         </div>
         <div class="product-detail">

@@ -402,13 +402,16 @@ hr {
 }
 
 .buy-now-button {
-  background-color: var(--light-blue);
+  background-color: red;
   font-size: 1.6em;
   color: #ffffff;
   padding: 15px;
   border-radius: 8px;
   border: none;
   margin-bottom: 15px;
+}
+.buy-now-button :hover{
+  background-color: rgb(254, 119, 119);
 }
 
 .action-button {
@@ -511,7 +514,10 @@ hr {
   border-radius: 4px;
   color: #fff;
 }
-
+.user{
+  font-size: 15px;
+  padding-left: 10px;
+}
 
 
 /* Estilos forms register, login, editar perfil y agregar productos */
