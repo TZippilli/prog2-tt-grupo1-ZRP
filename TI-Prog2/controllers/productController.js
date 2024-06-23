@@ -15,7 +15,8 @@ const productController = {
       ],
       order: [[{ model: db.Comentario, as: 'comentarios' }, 'createdAt', 'DESC']]
     }
-    let condition = false;
+    let propietario = false;
+    let logueado = false;
 
     db.Producto.findByPk(id, criterio)
       .then(function (results) {
@@ -24,12 +25,18 @@ const productController = {
         }
 
         if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
-          condition = true;
+          propietario = true;
+
+        }
+
+        if (req.session.user != undefined) {
+          logueado = true
         }
         res.render('product', {
           producto: results,
           comentarios: results.comentarios || [],
-          condition: condition,
+          propietario: propietario,
+          logueado: logueado,
           user: req.session.user
         });
       })
@@ -59,51 +66,27 @@ const productController = {
   },
 
   editProdForm: function (req, res) {
+    console.log('POST: editProdForm');
     let form = req.body;
-    let errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-      let filtradoEdit = {
-        include: [
-          { association: "usuario" }
-        ]
-      };
-
-      db.Producto.findByPk(req.params.id, filtradoEdit)
-        .then((resultados) => {
-          if (!resultados) {
-            return res.status(404).send('Productooo no encontrado');
-          }
-          return res.render('product-edit', {
-            errors: errors.array(),
-            old: req.body,
-            productFind: resultados
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-          return res.status(500).send('Error en el servidor');
-        });
-    } else {
-      let filtroSession = {
-        where: { id: req.params.id }
-      };
-
-      if (req.session.user) {
-        db.Producto.update(form, filtroSession)
-          .then(() => {
-            return res.redirect("/product/id/" + req.params.id);
-          })
-          .catch((err) => {
-            console.log(err);
-            return res.status(500).send('Error en el servidor');
-          });
-      } else {
-        return res.redirect("/users/profile/id/" + req.params.id);
-      }
+    let filtroSession = {
+      where: { id: req.params.id }
+    };
+    productUpdate = {
+      nombreProduct: form.nombreProduct,
+      imagenProduct: form.imagenProduct,
+      descripcionProduct: form.descripcionProduct,
+      clienteId: req.session.user.id
     }
+    db.Producto.update(productUpdate, filtroSession)
+      .then(() => {
+        return res.redirect("/product/" + req.params.id);
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).send('Error en el servidor en editProdForm');
+      });
   },
-
   detalle: function (req, res) {
     const id = req.params.id;
     let criterio = {
@@ -139,12 +122,16 @@ const productController = {
         return res.status(500).send('Error en el servidor');
       });
   },
-  productAdd: function (req, res) { 
+  productAdd: function (req, res) {
     res.render("product-add")
-   },
+  },
+  
   create: function (req, res) {
-    console.log("hola")
+    
     let { nombre, descripcion, imagen } = req.body
+    if (req.session.user == undefined){
+      return res.redirect("/")
+    }
     let id = req.session.user.id
 
 
@@ -156,7 +143,7 @@ const productController = {
 
     })
       .then(function (db) {
-        return res.redirect('/product/' + product.id) //revisar
+        return res.redirect('/product/' + product.id) 
       })
       .catch(function (err) {
         console.log(err)
@@ -166,11 +153,21 @@ const productController = {
   store: function (req, res) {
     let form = req.body;
     let errors = validationResult(req);
+    if (req.session == undefined || req.session.user == undefined){
+      return res.redirect("/");
+    }
 
     if (errors.isEmpty()) {
-      db.Producto.create(form)
+      //preparo nuevo auto
+      newCar ={
+        nombreProduct:form.nombreProduct,
+        imagenProduct:form.imagenProduct,
+        descripcionProduct:form.descripcionProduct,
+        clienteId:req.session.user.id
+      }
+      db.Producto.create(newCar)
         .then((results) => {
-          return res.redirect("/product/id/" + results.id);
+          return res.redirect("/product/" + results.id);
         })
         .catch((err) => {
           console.log(err);
@@ -251,32 +248,39 @@ const productController = {
   },
 
   destroy: function (req, res) {
-    let form = req.body;
+    const id = req.params.id
 
     let filtrado = {
       where: {
-        id: form.id
+        id: id
+      }
+    };
+    let filtradoComments = {
+      where: {
+        productId: id
       }
     };
 
     if (req.session.user != undefined) {
-      let id = req.session.user.id;
-      if (form.idUsuario == id) {
+      db.Comentario.destroy(filtradoComments)
+      .then((result) => {
         db.Producto.destroy(filtrado)
-          .then((result) => {
-            return res.redirect("/");
-          })
-          .catch((err) => {
-            console.log(err);
-            return res.status(500).send('Error en el servidor');
-          });
-      } else {
-        return res.redirect("/users/profile/id/" + id);
-      }
+        .then((result) => {
+          return res.redirect("/");
+        })
+        .catch((err) => {
+          console.log(err);
+          return res.status(500).send('Error en el servidor en destroy');
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).send('Error en el servidor en destroy');
+      });
+      
     } else {
-      return res.redirect("/users/login");
+      return res.redirect("/");
     }
-  }
-}
+}}
 
 module.exports = productController;
