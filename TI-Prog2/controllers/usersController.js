@@ -103,43 +103,31 @@ const usersController = {
     },
     
     
-    
-    update: function (req, res) {
+    profileUpdate: function (req, res) {
+   
         let form = req.body;
-        let errors = validationResult(req);
     
-        if (errors.isEmpty()) {
-            let hashedPassword = bcrypt.hashSync(form.contrasena, 10);
-    
-            db.User.update({
-                email: form.email,
-                usuario: form.nombre,
-                contrasenia: hashedPassword,
-                fecha_nacimiento: form.fechaNacimiento,
-                nro_documento: form.numeroDocumento,
-                foto_perfil: form.foto
-            }, {
-                where: { id: req.session.user.id }
-            }).then(() => {
-                res.redirect("/users/profile/"+ user.id);
-            }).catch((err) => {
-                console.log(err);
-                res.status(500).send('Error en el servidor');
-            });
-        } else {
-            db.User.findByPk(req.session.user.id)
-                .then(function (user) {
-                    if (user) {
-                        res.render('profile-edit', { user: user, errors: errors.mapped(), old: req.body });
-                    } else {
-                        res.status(404).send('Usuario no encontrado');
-                    }
-                }).catch(function (error) {
-                    console.log(error);
-                    res.status(500).send('Error en el servidor');
-                });
+        let filtroSession = {
+          where: { id: req.params.id }
+        };
+        profileUpdate = {
+          email: form.email,  
+          nombre: form.nombre,
+          contrasenia: form.contrasenia,
+          fechaNacimiento: form.fechaNacimiento,
+          numeroDocumento: form.numeroDocumento,
+          foto: form.foto,
+          clienteId: req.session.user.id
         }
-    },
+        db.Producto.update(profileUpdate, filtroSession)
+          .then(() => {
+            return res.redirect("/users/profile/"+ req.session.user.id);
+          })
+          .catch((err) => {
+            console.log(err);
+            return res.status(500).send('Error en el servidor en editProdForm');
+          });
+      },
     
 
     profile: function (req, res) {

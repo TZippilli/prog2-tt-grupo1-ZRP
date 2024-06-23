@@ -36,15 +36,14 @@ const validationsEdit = [
     ]
 
 router.get("/register", usersController.register);
-router.post("/register",validationsRegister, usersController.store);
 router.get("/login", usersController.loginGet); //login
+router.get("/profile/:id", usersController.profile)
+router.get('/edit/:id', usersController.profileEdit);
+
+router.post("/register",validationsRegister, usersController.store);
 router.post("/login",validationsLogin, usersController.login); //checkuser
 router.post("/logout", usersController.logout);
-
-router.get("/profile/:id", usersController.profile)
-
-router.get('/edit/:id', usersController.profileEdit);
-router.post('/edit/:id', usersController.update);
+router.post('/edit/:id', usersController.profileUpdate);
   
 
 module.exports = router;
