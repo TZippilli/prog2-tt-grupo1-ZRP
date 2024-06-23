@@ -87,6 +87,7 @@ const productController = {
         return res.status(500).send('Error en el servidor en editProdForm');
       });
   },
+  
   detalle: function (req, res) {
     const id = req.params.id;
     let criterio = {
@@ -281,7 +282,27 @@ const productController = {
       
     } else {
       return res.redirect("/");
-    }
-}}
+    
+}},
+
+addComment: function (req, res) { 
+
+  const id = req.params.id;
+  let {comentario} = req.body;
+  newComment ={
+    productId:id,
+    clienteId:req.session.user.id,
+    comentario:comentario
+  }
+
+  db.Comentario.create(newComment)
+  .then(function (db) {
+    res.redirect('/product/' + id );
+  })
+  .catch(function (er) {
+    console.log(er)
+  })
+ }
+}
 
 module.exports = productController;

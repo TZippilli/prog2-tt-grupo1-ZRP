@@ -32,6 +32,7 @@ router.post("/")
 router.post('/add', productController.store)
 router.post('/edit/:id', validationsEditAdd, productController.editProdForm);
 router.post('/destroy/:id', productController.destroy);
+router.post("/add-coments/:id", productController.addComment);
 
 
 
