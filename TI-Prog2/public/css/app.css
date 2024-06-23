@@ -170,6 +170,10 @@ hr {
   border-bottom: solid 1px var(--gray);
 }
 
+.no-search{
+  font-size: 20px;
+  padding-left: 15px;
+}
 
 
 /*====== Banner ======*/
@@ -508,7 +512,7 @@ hr {
   color: #fff;
 }
 
-.row {}
+
 
 /* Estilos forms register, login, editar perfil y agregar productos */
 body {

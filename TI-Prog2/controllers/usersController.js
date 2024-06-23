@@ -13,7 +13,7 @@ const usersController = {
     },
 
     login: function (req, res) {
-        let { email, contrasenia, rememberMe } = req.body;
+        let { email, contrasenia, recordarme } = req.body;
 
         db.User.findOne({
             where: { email: email },
@@ -27,9 +27,9 @@ const usersController = {
                         nombre: resultados.nombre,
                         email: resultados.email
                     };
-                    if (rememberMe === 'on') {
+                    if (recordarme === 'on') {
                         res.cookie('rememberUser', resultados.id, {
-                            maxAge: 1000 * 60 * 15
+                            maxAge: 1000 * 60 * 15 
                         });
                     }
                     res.redirect('/');
@@ -83,8 +83,8 @@ const usersController = {
     
     profileEdit: function (req, res, next) {
         if (req.session.user) {
-            let id = req.session.user.id;
-    
+            let id = req.session.user.id; // si estoy logueado puedo editar MI usuario
+
             db.User.findByPk(id)
                 .then(function (user) {
                     if (user) {
@@ -95,7 +95,7 @@ const usersController = {
                 })
                 .catch(function (error) {
                     console.log(error);
-                    res.status(500).send('Error en el servidor');
+                    res.status(500).send('Error en el servidor de profileEdit');
                 });
         } else {
             res.redirect("/users/login");
