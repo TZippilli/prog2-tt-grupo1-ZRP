@@ -66,7 +66,7 @@ const productController = {
   },
 
   editProdForm: function (req, res) {
-    console.log('POST: editProdForm');
+   
     let form = req.body;
 
     let filtroSession = {
@@ -107,13 +107,14 @@ const productController = {
           return res.status(404).send('Producto noo encontrado');
         }
 
-        if (req.session.user != undefined && req.session.user.id == results.usuario.id) {
+        if (req.session.user != undefined && req.session.user.id == results.user.id) {
           condition = true;
         }
         res.render('product', {
           producto: results,
           comentarios: results.comentarios || [],
-          condition: condition,
+          propietario: propietario,
+          logueado:logueado,
           user: req.session.user
         });
       })

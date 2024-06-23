@@ -30,7 +30,7 @@
 							</div>
 							<div class="formulario">
 								<label for="imagen" style="font-size: 18px;">Imagen:</label>
-								<input type="text" class="form-login" id="imagen" name="imagenProduct" accept="image/*"
+								<input type="text" class="form-login" id="imagen" name="imagenProduct" value="<%= producto.imagenProduct %>" accept="image/*"
 									required>
 									<% if (locals.errors && errors.imagenProduct) { %>
 										<p class="error"><%= errors.imagenProduct.msg %></p>
