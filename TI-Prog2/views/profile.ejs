@@ -21,7 +21,7 @@
                 <div class="d-flex align-items-center ">
                     <h1 class="main-title">
                         <%= userFound.nombre %>
-                        <% if(user.id == userFound.id){ %>   
+                        <% if(user == userFound.id){ %>   
                         <a href="/users/edit/<%= userFound.id %>">
                             <i class="fas fa-cog"></i>
                             </a>

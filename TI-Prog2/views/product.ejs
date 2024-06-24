@@ -51,7 +51,7 @@
                     </section>
                     <% if(logueado){%>
                         <form method="POST" action="/product/add-coments/<%=producto.id%>" class="form">
-                            <input class="form-input" type="text" value="" placeholder="Agregar comentario" id="comentario" name="comentario">
+                            <input class="form-input" type="text" value="" placeholder="Agregar comentario" id="comentario" name="comentario" required>
                             <button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
                         </form>
                     <%} else {%>
