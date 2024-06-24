@@ -21,11 +21,13 @@
                 <div class="d-flex align-items-center ">
                     <h1 class="main-title">
                         <%= userFound.nombre %>
-                        <% if(user == userFound.id){ %>   
-                        <a href="/users/edit/<%= userFound.id %>">
-                            <i class="fas fa-cog"></i>
+
+                        <% if (locals.user && locals.user.id===userFound.id) { %>
+                            <a href="/users/edit/<%= userFound.id %>">
+                                <i class="fas fa-cog"></i>
                             </a>
                             <% } %>
+    
                     </h1>
                     <a class="btn mt-3 ml-4" href="">SEGUIR</a>
                 </div>
