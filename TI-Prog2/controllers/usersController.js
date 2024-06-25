@@ -119,7 +119,7 @@ const usersController = {
           foto: form.foto,
           clienteId: req.session.user.id
         }
-        db.Producto.update(profileUpdate, filtroSession)
+        db.User.update(profileUpdate, filtroSession)
           .then(() => {
             return res.redirect("/users/profile/"+ req.session.user.id);
           })
