@@ -22,7 +22,7 @@
                     <h1 class="main-title">
                         <%= userFound.nombre %>
 
-                        <% if (locals.user && locals.user.id==userFound.id) { %>
+                        <% if (locals.user && locals.user.id===userFound.id) { %>
                             <a href="/users/edit/<%= userFound.id %>">
                                 <i class="fas fa-cog"></i>
                             </a>
