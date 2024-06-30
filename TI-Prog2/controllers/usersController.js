@@ -105,10 +105,10 @@ const usersController = {
     
     profileUpdate: function (req, res) {
    
-        let form = req.body;
+        let form = req.session.user;
     
         let filtroSession = {
-          where: { id: req.params.id }
+          where: { form: req.params.id }
         };
         profileUpdate = {
           email: form.email,  
@@ -121,7 +121,7 @@ const usersController = {
         }
         db.User.update(profileUpdate, filtroSession)
           .then(() => {
-            return res.redirect("/users/profile/"+ req.session.user.id);
+            return res.redirect("/users/profile/"+ id);
           })
           .catch((err) => {
             console.log(err);

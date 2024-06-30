@@ -43,7 +43,7 @@ router.get('/edit/:id', usersController.profileEdit);
 router.post("/register",validationsRegister, usersController.store);
 router.post("/login",validationsLogin, usersController.login); //checkuser
 router.post("/logout", usersController.logout);
-router.post('/edit/:id', usersController.profileUpdate);
+router.post('/edit/:id', usersController.profileEdit);
   
 
 module.exports = router;
